@@ -7,6 +7,10 @@ library(tidyverse)
 publications <- read_csv('0_data/publications_sdg.csv')
 projects <- read_csv('0_data/projects_sdg.csv')
 
+##########
+# plot 1
+##########
+
 # count occurences
 pub = publications %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything()) %>% mutate(type = "publication")
 pro = projects %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything()) %>% mutate(type = "project")
@@ -46,7 +50,7 @@ ggplot(data = pro) +
   )
 ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_projects.pdf')
 
-# plot project frequencies
+# plot all frequencies
 ggplot(data = alltypes) +
   geom_col(mapping = aes(x = name, y = value, fill = name)) +
   theme_minimal() +
@@ -64,3 +68,14 @@ ggplot(data = alltypes) +
   facet_wrap(~type)
 ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_alltypes.pdf')
 
+
+##########
+# plot 2
+##########
+
+
+##########
+# plot 3
+##########
+
+# we do this

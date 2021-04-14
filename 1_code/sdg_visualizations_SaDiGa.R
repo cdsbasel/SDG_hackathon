@@ -57,15 +57,10 @@ ggplot(data = alltypes) +
   ) +
   labs(
     title = "SDG Frequencies",
-    subtitle = "Number of projects related to SDGs at University of Basel",
+    subtitle = "Number of projects and publications related to SDGs at University of Basel",
     x = "SDG",
     y = "Frequency"
   ) +
   facet_wrap(~type)
 ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_alltypes.pdf')
 
-
-# non-quality visualization
-pdf('2_figures/sdg_frequencies_GROUP_GROUPPSEUDONYM.pdf')
-barplot(colMeans(publications[,paste0('SDG-',ifelse(1:17<10,paste0('0',1:17),1:17))]))
-dev.off()

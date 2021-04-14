@@ -24,10 +24,12 @@ The goal of the first hackathon part is to produce three quality visulialization
 
 #### Rules
 
-1. Each group creates and works in a single R script that is given a unique name by the group, e.g., a group pseudonym, to not infer with the other group's script files. The script file is stored in `1_code`
-2. Each group creates three .pdf figures files in the 
-
+1. Each group creates and works in a single R script that is given a unique name by the group, e.g., a group pseudonym, to not infer with the other group's script files. The script file is stored in `1_code`. See code template including the placehold `GROUPPSEUDONYM`.
+2. Each group creates three .pdf figures files in the `2_figures` folder. Figure files also must receive a suffix identifying the group. See example figure. 
+3. Pull before you Push.
 
 
 ## Part II - Reporting
+
+tba
 

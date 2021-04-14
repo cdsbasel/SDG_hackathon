@@ -2084,25 +2084,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <div class="d-article">
-<h2 id="data">Data</h2>
-<h4 id="preliminaries">Preliminaries</h4>
-<p>The sustainability office of the University of Basel provided us with a multiple databases containing information of the University’s historical electronic research output (publications and funded projects).</p>
-<p>These data have been preprocessed in the following way:</p>
-<p><i>Publications</i></p>
-<ol type="1">
-<li>Included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).</li>
-<li>Selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%). About half of all publications remained.<br />
-</li>
-<li>Identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.</li>
-</ol>
-<p><i>Publications &amp; Projects</i></p>
-<ol type="1">
-<li>Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item.</li>
-<li>Using translations of the SDG queries of the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> and the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected wether titles or abstracts were SDG-relevant.</li>
-</ol>
-<h4 id="download">Download</h4>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>Clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>.</p>
 <h2 id="part-i---visualizing">Part I - Visualizing</h2>
+<h4 id="goal">Goal</h4>
+<p>The goal of the first hackathon part is to produce three quality visulializations illustrating…</p>
+<ol type="1">
+<li>The frequency distribution of sustainable development goals detected in Unibas publications and projects.</li>
+<li>The relationship between sustainable development goals.</li>
+<li>The distribution of sustainable development goals detected in Unibas publications and projects as a function of Unibas organizational units.</li>
+</ol>
+<h4 id="rules">Rules</h4>
+<ol type="1">
+<li>Each group creates and works in a single R script that is given a unique name by the group, e.g., a group pseudonym, to not infer with the other group’s script files. The script file is stored in <code>1_code</code>. See code template including the placehold <code>GROUPPSEUDONYM</code>.</li>
+<li>Each group creates three .pdf figures files in the <code>2_figures</code> folder. Figure files also must receive a suffix identifying the group. See example figure.</li>
+<li>Pull before you Push.</li>
+</ol>
 <h2 id="part-ii---reporting">Part II - Reporting</h2>
+<p>tba</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

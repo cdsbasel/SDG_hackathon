@@ -43,7 +43,7 @@ ggplot(data = pro) +
     x = "SDG",
     y = "Frequency"
   )
-ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_pprojects.pdf')
+ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_projects.pdf')
 
 
 

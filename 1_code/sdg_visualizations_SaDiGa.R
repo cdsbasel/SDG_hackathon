@@ -10,6 +10,8 @@ projects <- read_csv('0_data/projects_sdg.csv')
 pub = publications %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything())
 pro = projects %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything())
 
+
+
 ggplot(data = pub) +
   geom_col(mapping = aes(x = name, y = value, fill = name)) +
   theme_minimal() +
@@ -19,9 +21,12 @@ ggplot(data = pub) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   ) +
   labs(
-    title = "SDG Frequencies"
+    title = "SDG Frequencies",
+    subtitle = "Number of punlications related to SDGs at University of Basel",
+    x = "SDG",
+    y = "Frequency"
   )
-  
+ggsave(filename = '2_figures/sdg_frequencies_SaDiGa.pdf')
 
 
 

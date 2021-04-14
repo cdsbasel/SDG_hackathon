@@ -48,7 +48,7 @@ for (sdg_1 in 1:17) {
 #   )
 
 
-qgraph::qgraph(df, shape="circle", posCol="darkgreen", negCol="darkred", vsize=10)
+p <- qgraph::qgraph(df, shape="circle", posCol="darkgreen", negCol="darkred", vsize=10)
 
 
 ggsave(p, file="2_figures/sdg_co_occurences_GirlsClub.pdf", device="pdf",dpi = 600,width = 20, height = 20, units = "cm") 

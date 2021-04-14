@@ -2,7 +2,7 @@ name: "SDG_tmp"
 title: "CDS Hackathon"
 description: |
   CDS Hackathon
-output_dir: "_site"
+output_dir: "."
 navbar:
   right:
     - text: "Home"

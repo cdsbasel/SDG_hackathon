@@ -1,0 +1,16 @@
+name: "SDG_tmp"
+title: "CDS Hackathon"
+description: |
+  CDS Hackathon
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Data"
+      href: data.html
+    - text: "Hackathon"
+      href: hackathon.html
+    - text: "Report"
+      href: report.html
+output: distill::distill_article

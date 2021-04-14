@@ -1,0 +1,29 @@
+---
+title: "CDS Hackathon"
+description: "Identifying the UN Sustainable Development Goals in University of Basel research output"
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+```
+
+This is the home of the 2021 UN Sustainability Development Goal Hackathon of the Center for Cognitive and Decision Sciences, University of Basel.
+
+Learn more about the event on the <a href="data.html"><b>Data</b></a>, <a href="hackathon.html"><b>Hackathon</b></a>, and <a href="report.html"><b>Report</b></a> pages. 
+
+<p align='center' style='font-size:10px'><img src='assets/sdgs.png' width=100%>
+<br> from <a href='https://en.unesco.org/sustainabledevelopmentgoals'>en.unesco.org</a></p>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+---
+title: "Hackathon"
+description: "Identifying the UN Sustainable Development Goals in University of Basel research output"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Data
+
+#### Preliminaries
+
+The sustainability office of the University of Basel provided us with a multiple databases containing information of the University's historical electronic research output (publications and funded projects). 
+
+These data have been preprocessed in the following way:
+
+<i>Publications</i>
+
+1. Included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
+2. Selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%). About half of all publications remained.    
+3. Identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.    
+
+<i>Publications & Projects</i>
+
+1. Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item. 
+2. Using translations of the SDG queries of the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> and the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected wether titles or abstracts were SDG-relevant.  
+
+#### Download
+
+
+
+## Part I - Visualizing
+
+
+
+
+
+## Part II - Reporting
+

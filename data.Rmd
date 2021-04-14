@@ -1,0 +1,64 @@
+---
+title: "Data"
+description: ""
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+#### Preliminaries
+
+The sustainability office of the University of Basel provided us with a multiple databases containing information of the University's historical electronic research output (publications and funded projects). 
+
+These data have been preprocessed in the following way:
+
+<i>Publications</i>
+
+1. Included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
+2. Selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%). About half of all publications remained.    
+3. Identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.    
+
+<i>Publications & Projects</i>
+
+1. Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item. 
+2. Using translations of the SDG queries of the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> and the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected wether titles or abstracts were SDG-relevant.  
+
+#### Data
+
+Download the data <a href="https://www.dropbox.com/s/2auu31t3e3gdc74/UnibasSDGs.zip?dl=1"><b>here</b></a>.
+
+<i>Publications columns</i>
+
+| Variable | Description |
+|:-------------|:-------------------------------------|
+| `type` | Type of publication. |
+| `year` | Year of publication.  |
+| `authors` | Author list of publication. |
+| `title` | Title of publication. |   
+| `abstract` | Abstract of publication. |
+| `outlet` | Name of journal, book, or proceedings publication. |
+| `peer_reviewed` | Has publication been subjected to peer review. |
+| `organisation` | Original list of Unibas organizations involved in publication. |
+| `unibas_authors` | Publication authors at University of Basel. |
+| `unibas_publcation` | Publication offically affiliated with University of Basel. (?) |
+| `doi` | Digital object identfier |
+| `Org-*` | Logical vectors indicating Unibas faculty-level organizations involved in publication. |
+| `SDG-*` | Logical vectors indicating whether publication addresses the 17 sustainable development goals. |
+
+<i>Projects columns</i>
+
+| Variable | Description |
+|:-------------|:-------------------------------------|
+| `lead` | Name of project lead researcher. |
+| `co_lead` | Names of project co-lead researchers.  |
+| `organisation` | Original list of Unibas organizations involved in project |
+| `title` | Title of project. |
+| `year` | Year of project start.  |
+| `abstract` | Abstract of project. |
+| `keywords` |  Keywords of project. |
+| `type` | Type of project: self- or externally financed. |
+| `status` | Active or Completed |
+| `id` | Internal idenifier number |
+| `Org-*` | Logical vectors indicating Unibas faculty-level organizations involved in project. |
+| `SDG-*` | Logical vectors indicating whether publication addresses the 17 sustainable development goals. |

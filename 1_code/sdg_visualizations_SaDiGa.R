@@ -46,7 +46,6 @@ ggplot(data = pro) +
 ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_projects.pdf')
 
 
-
 # non-quality visualization
 pdf('2_figures/sdg_frequencies_GROUP_GROUPPSEUDONYM.pdf')
 barplot(colMeans(publications[,paste0('SDG-',ifelse(1:17<10,paste0('0',1:17),1:17))]))

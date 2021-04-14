@@ -9,11 +9,23 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Preliminaries
 
-Clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>
+Clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>. 
+
 
 ## Part I - Visualizing
 
-The goal of the first hackathon part is to produce three quality 
+#### Goal
+
+The goal of the first hackathon part is to produce three quality visulializations illustrating...
+
+1. The frequency distribution of sustainable development goals detected in Unibas publications and projects. 
+2. The relationship between sustainable development goals. 
+3. The distribution of sustainable development goals detected in Unibas publications and projects as a function of Unibas organizational units. 
+
+#### Rules
+
+1. Each group creates and works in a single R script that is given a unique name by the group, e.g., a group pseudonym, to not infer with the other group's script files. The script file is stored in `1_code`
+2. Each group creates three .pdf figures files in the 
 
 
 

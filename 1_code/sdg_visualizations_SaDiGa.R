@@ -22,13 +22,28 @@ ggplot(data = pub) +
   ) +
   labs(
     title = "SDG Frequencies",
-    subtitle = "Number of punlications related to SDGs at University of Basel",
+    subtitle = "Number of publications related to SDGs at University of Basel",
     x = "SDG",
     y = "Frequency"
   )
-ggsave(filename = '2_figures/sdg_frequencies_SaDiGa.pdf')
+ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_publications.pdf')
 
 
+ggplot(data = pro) +
+  geom_col(mapping = aes(x = name, y = value, fill = name)) +
+  theme_minimal() +
+  scale_fill_viridis_d() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(
+    title = "SDG Frequencies",
+    subtitle = "Number of projects related to SDGs at University of Basel",
+    x = "SDG",
+    y = "Frequency"
+  )
+ggsave(filename = '2_figures/sdg_frequencies_SaDiGa_pprojects.pdf')
 
 
 

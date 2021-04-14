@@ -26,7 +26,7 @@ These data have been preprocessed in the following way:
 
 #### Data
 
-Download the data <a href="https://www.dropbox.com/s/2auu31t3e3gdc74/UnibasSDGs.zip?dl=1"><b>here</b></a>.
+The data is shared via this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github</b></a> repository. 
 
 <i>Publications columns</i>
 

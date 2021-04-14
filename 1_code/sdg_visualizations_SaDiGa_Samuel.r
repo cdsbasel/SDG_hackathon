@@ -96,7 +96,9 @@ ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
   theme_minimal() +
   scale_fill_viridis_c() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
   ) +
   labs(
     title = "Proportion of SDG Publications by Organisation"
@@ -121,7 +123,9 @@ ggplot(projects_test2, aes(x= SDG, y= Organisations, fill = value)) +
   theme_minimal() +
   scale_fill_viridis_c() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
   ) +
   labs(
     title = "Proportion of SDG Projects by Organisation",

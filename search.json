@@ -36,7 +36,12 @@
       "title": "Unibas SDG Report",
       "description": "CDS Brown Bag",
       "author": [],
+<<<<<<< HEAD
+      "contents": "\nIntroduction\nDescribe mission: Detect SDGs in research output of the University of Basel per request of Sustainability Office of Unibas.\n\nData\nResearch database & Grants office database\nThree files correspinding to different research items: publications, projects (self funded), projects (externally funded)\nMethodological\nLimit to 2010 to 2020\nQuery search using Aurora (Link) and Elsevier (Link). Goldstandard? What are other Universities doing (Comparable)? Why are they different? Discuss caveats.\nConducted using corpustools R package and translations of the queries.\nChoice of organizational unit\nDistribution of SDG\nText including numbers computed using inline code: No. articles (18458), No. of projects (1040), No. of matches (any SDG) in both (publications: 5927; projects: 375).\nText describing results in Figure.\nFigure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)\n\n\n\n\n\n\nDistribution of SDG across Time\nOnly meaningful Elsevir\nDistribution of SDG by organizational unit\nText describing organizational units incl. inline computed numbers.\nText describing results in Figure.\nFigure showing frequency of SDGs by unit.\n\n\n\n\n\n\nInterdisciplinarity (one unit versus multiple units?)\n\n\n\n",
+      "last_modified": "2021-04-29T16:05:30+02:00"
+=======
       "contents": "\nIntroduction\nDescribe mission: Detect SDGs in research output of the University of Basel per request of Sustainability Office of Unibas.\n\nData\n\n\n\nResearch database & Grants office database\nThree files correspinding to different research items: publications, projects (self funded), projects (externally funded)\nMethodological\nLimit to 2010 to 2020\nQuery search using Aurora (Link) and Elsevier (Link). Goldstandard? What are other Universities doing (Comparable)? Why are they different? Discuss caveats.\nConducted using corpustools R package and translations of the queries.\nChoice of organizational unit\nDistribution of SDG\n\n\n\nText including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both.\nText describing results in Figure.\nFigure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)\n\n\n\nDistribution of SDG across Time\nOnly meaningful Elsevir\nDistribution of SDG by organizational unit\nText describing organizational units incl. inline computed numbers.\nText describing results in Figure.\nFigure showing frequency of SDGs by unit.\nInterdisciplinarity (one unit versus multiple units?)\n\n\n\n",
+<<<<<<< HEAD
       "last_modified": "2021-04-29T16:09:19+02:00"
     },
     {
@@ -45,6 +50,10 @@
       "author": [],
       "contents": "\nIntroduction\nDescribe mission: Detect SDGs in research output of the University of Basel per request of Sustainability Office of Unibas.\n\nData\nResearch database & Grants office database\nThree files correspinding to different research items: publications, projects (self funded), projects (externally funded)\nMethodological\nLimit to 2010 to 2020\nQuery search using Aurora (Link) and Elsevier (Link). Goldstandard? What are other Universities doing (Comparable)? Why are they different? Discuss caveats.\nConducted using corpustools R package and translations of the queries.\nChoice of organizational unit\nDistribution of SDG\nText including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both.\nText describing results in Figure.\nFigure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)\n\n\n\n\n\n\nDistribution of SDG across Time\nOnly meaningful Elsevir\nDistribution of SDG by organizational unit\nText describing organizational units incl. inline computed numbers.\nText describing results in Figure.\nFigure showing frequency of SDGs by unit.\n\n\n\n\n\n\nInterdisciplinarity (one unit versus multiple units?)\n\n\n\n",
       "last_modified": "2021-04-29T16:08:53+02:00"
+=======
+      "last_modified": "2021-04-29T15:08:31+02:00"
+>>>>>>> bb9e9b1ce4117a6268cc22d9d0079f4db3ae0c46
+>>>>>>> 5c13ae13d541c44df1546902cfbbbb190d072e90
     }
   ],
   "collections": []

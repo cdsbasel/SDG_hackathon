@@ -24,10 +24,7 @@ Describe mission: Detect SDGs in research output of the University of Basel per 
 
 ### Data
 ```{r, echo = F}
-projects_sdg <- read_csv("0_data/projects_sdg.csv")
-publications_sdg <- read_csv("0_data/publications_sdg.csv")
-projects_sdg_elsevier <- projects_sdg %>% select(lead:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% 
-  pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
+projects_sdg_elsevier <- projects_sdg %>% select(lead:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
 publications_sdg_elsevier <- publications_sdg %>% select(type:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% filter(type == "article") %>% pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
 ```
 
@@ -61,14 +58,6 @@ Text including numbers computed using inline code: No. articles, No. of projects
 Text describing results in Figure. 
 
 Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)
-```{r, echo = F, fig.height=10, fig.width= 10}
-projects_sdg_elsevier_summary <- projects_sdg_elsevier %>% group_by(SDG,type) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/total_projects))
-publication_sdg_elsevier_summary <- publications_sdg_elsevier %>% group_by(SDG) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/sdg_publications_match))
-
-publication_sdg_elsevier_summary %>%  ggplot() + geom_bar(aes(y = SDG, x = prop_sdg), stat = "identity") +  labs(title = "Frequency of SDG matches by SDG")
-```
-
-
 
 # Distribution of SDG across Time
 

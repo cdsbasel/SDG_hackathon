@@ -91,16 +91,13 @@ In order to so, Sustainable development goals were detected in research output w
 As the Hackathon was conducted as a request by the sustainability office of the University of Basel, the office provided a multiple databases containing information of the University’s historical electronic research output.
 Data was collected from the Research database, as well as from the Grants office database. Data contained not only publications made by researcher employed by the University of Basel but also projects (self funded and externally funded). 
 
-XY articles were included 
-
-Number of faculties 
-
+`r toString(n_publications)` Articles were included, as well as `r toString(n_projects)`) projects. In total  `r toString(n_matches_publications)` matches fitting to the search querries were found in publications and `r toString(n_matches_projects)` were found in projects.  
 
 ## Methodological 
 
-Limit to 2010 to 2020
+Only Publications and Projects that were published or completed from 2010 to 2020 were included.The Query search  
 
-Query search using Aurora (Link) and Elsevier (Link). Goldstandard? What are other Universities doing (Comparable)? Why are they different? Discuss caveats.
+Query search using Aurora (Link). 
  
 Conducted using corpustools R package and translations of the queries.
 

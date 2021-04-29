@@ -35,8 +35,8 @@
       "path": "report.html",
       "title": "Unibas SDG Report",
       "author": [],
-      "contents": "\nUnder construction…\n\n\n\n",
-      "last_modified": "2021-04-14T12:18:43+02:00"
+      "contents": "\nIntroduction\nDescribe mission\nDescribe approach, i.e., Query search using Aurora and Elsevier\nDistribution of SDG\nText including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both.\nText describing results in Figure.\nFigure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)\nDistribution of SDG by organizational unit\nText describing organizational units incl. inline computed numbers.\nText describing results in Figure.\nFigure showing frequency of SDGs by unit.\n\n\n\n",
+      "last_modified": "2021-04-29T12:23:53+02:00"
     }
   ],
   "collections": []

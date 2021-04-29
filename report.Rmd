@@ -7,4 +7,26 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Under construction...
+# Introduction
+
+Describe mission
+
+Describe approach, i.e., Query search using Aurora and Elsevier
+
+# Distribution of SDG
+
+Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
+
+Text describing results in Figure. 
+
+Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)
+
+
+# Distribution of SDG by organizational unit
+
+Text describing organizational units incl. inline computed numbers. 
+
+Text describing results in Figure. 
+
+Figure showing frequency of SDGs by unit.
+

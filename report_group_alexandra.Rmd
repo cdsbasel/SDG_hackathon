@@ -1,9 +1,18 @@
 ---
 title: "Unibas SDG Report"
-description: |
+description: "CDS Brown Bag"
+output: 
+      html_document:
+            toc: true
+            toc_float: 
+              collapsed: false
+              smooth_scroll: true
+            theme: flatly 
+            df_print: paged
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -14,6 +23,10 @@ Describe mission: Detect SDGs in research output of the University of Basel per 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
 
 ### Data
+```{r, echo = F}
+projects_sdg_elsevier <- projects_sdg %>% select(lead:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
+publications_sdg_elsevier <- publications_sdg %>% select(type:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% filter(type == "article") %>% pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
+```
 
 Research database & Grants office database
 
@@ -32,6 +45,14 @@ Choice of organizational unit
 
 # Distribution of SDG
 
+```{r, echo = F}
+total_articles <- length(unique(publications_sdg_elsevier$doc_id))
+total_projects <- length(unique(projects_sdg_elsevier$doc_id))
+sdg_project_match <- projects_sdg_elsevier %>% group_by(doc_id) %>% summarise(sum_match = sum(match)) %>% filter(sum_match > 0)
+sdg_project_match <- nrow(sdg_project_match)
+sdg_publications_match <- publications_sdg_elsevier %>% group_by(doc_id) %>% summarise(sum_match = sum(match)) %>% filter(sum_match > 0)
+sdg_publications_match <- nrow(sdg_publications_match)
+```
 Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
 
 Text describing results in Figure. 

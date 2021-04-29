@@ -62,18 +62,23 @@ projects_test2 <- projects_test %>%
 
 # Introduction
 
-Describe mission: Detect SDGs in research output of the University of Basel per request of Sustainability Office of Unibas.
+In April 2021 the Center for Cognitive and Decision Science of the Unviversity of Basel conducted a UN Sustainability Development Goal Hackathon. The goal of this Hackathon was to identify to which sustainable development goals the research done by different organizational units contributes.
+
+In order to so, Sustainable development goals were detected in research output with a querry based approach. aurora etc. 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
 
-### Data
+## Data
 
-Research database & Grants office database
+As the Hackathon was conducted as a request by the sustainability office of the University of Basel, the office provided a multiple databases containing information of the University’s historical electronic research output.
+Data was collected from the Research database, as well as from the Grants office database. Data contained not only publications made by researcher employed by the University of Basel but also projects (self funded and externally funded). 
 
-Three files correspinding to different research items: publications, projects (self funded), projects (externally funded)
+XY articles were included 
+
+Number of faculties 
 
 
-### Methodological 
+## Methodological 
 
 Limit to 2010 to 2020
 

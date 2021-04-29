@@ -1,0 +1,55 @@
+---
+title: "Unibas SDG Report"
+description: |
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+Describe mission: Detect SDGs in research output of the University of Basel per request of Sustainability Office of Unibas.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
+
+### Data
+
+Research database & Grants office database
+
+Three files correspinding to different research items: publications, projects (self funded), projects (externally funded)
+
+
+### Methodological 
+
+Limit to 2010 to 2020
+
+Query search using Aurora (Link) and Elsevier (Link). Goldstandard? What are other Universities doing (Comparable)? Why are they different? Discuss caveats.
+ 
+Conducted using corpustools R package and translations of the queries.
+
+Choice of organizational unit
+
+# Distribution of SDG
+
+Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
+
+Text describing results in Figure. 
+
+Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)
+
+# Distribution of SDG across Time
+
+Only meaningful Elsevir
+
+# Distribution of SDG by organizational unit
+
+Text describing organizational units incl. inline computed numbers. 
+
+Text describing results in Figure. 
+
+Figure showing frequency of SDGs by unit.
+
+Interdisciplinarity (one unit versus multiple units?)
+
+

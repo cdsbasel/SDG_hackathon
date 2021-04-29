@@ -19,6 +19,7 @@ pub = publications %>%
   as_tibble() %>% 
   pivot_longer(everything()) %>% 
   mutate(item_type = "publication")
+pub$name <-substring(pub$name,1,6)
 
 pro = projects %>% 
   select(starts_with("SDG") & ends_with("Elsevier")) %>% 
@@ -29,6 +30,7 @@ pro = projects %>%
 
 pro = projects %>% pivot_longer(45:59 )
 pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
+pro2$name <-substring(pro2$name,1,6)
 
 # for plot org-unit/sdg
 publications_all <- publications %>%
@@ -42,6 +44,8 @@ publications_total <- publications_all %>%
   pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
   group_by(Organisations) %>%
   mutate(value = value/sum(value))
+publications_total$SDG <-substring(publications_total$SDG,1,6)
+publications_total$Organisations2 <-substring(publications_total$Organisations,5,)
 
 
 projects_test <- projects %>% 
@@ -56,6 +60,20 @@ projects_test2 <- projects_test %>%
   pivot_longer(`SDG-01-Elsevier` : `SDG-16-Elsevier`, names_to = "SDG") %>% 
   group_by(Organisations) %>% 
   mutate(value = value/sum(value))
+projects_test2$SDG <-substring(projects_test2$SDG,1,6)
+projects_test2$Organisations2 <-substring(projects_test2$Organisations,5,)
+
+###### prepare numbers to include in the text
+# No. articles
+n_publications <- nrow(publications)
+
+# No. of projects
+n_projects <- nrow(projects)
+
+# No. of matches (any SDG) in both.
+n_matches_publications <- sum(pub$value)
+n_matches_projects <- sum(pro$value)
+
 
 ```
 
@@ -89,8 +107,7 @@ Conducted using corpustools R package and translations of the queries.
 Choice of organizational unit
 
 # Distribution of SDG
-
-Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
+Text including numbers computed using inline code: No. articles (`r toString(n_publications)`), No. of projects (`r toString(n_projects)`), No. of matches (any SDG) in both (publications: `r toString(n_matches_publications)`; projects: `r toString(n_matches_projects)`). 
 
 Text describing results in Figure. 
 
@@ -141,11 +158,13 @@ Only meaningful Elsevir
 
 Text describing organizational units incl. inline computed numbers. 
 
+
+
 Text describing results in Figure. 
 
 Figure showing frequency of SDGs by unit.
 ```{r}
-ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
+ggplot(publications_total, aes(x= SDG, y=Organisations2, fill = value)) +
   geom_tile() +
   theme_minimal() +
   scale_fill_viridis_c() +
@@ -160,7 +179,7 @@ ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
 ```
 
 ```{r}
-ggplot(projects_test2, aes(x= SDG, y= Organisations, fill = value)) +
+ggplot(projects_test2, aes(x= SDG, y= Organisations2, fill = value)) +
   geom_tile() +
   theme_minimal() +
   scale_fill_viridis_c() +

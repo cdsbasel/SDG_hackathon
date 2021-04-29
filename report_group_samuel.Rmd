@@ -129,7 +129,7 @@ Text describing results in Figure.
 
 Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)
 
-The figure below shows the number of projects dealing with the SDGs. Externally funded projects are in a lighter hue and internally funded projects are in the darker hue. Again out of the `r toString(n_projects)` projects concerning SDGs SDG-03 receives the most attention with a total of 234 projects.
+The figure below shows the number of projects dealing with the SDGs. Externally funded projects are in a lighter hue and internally funded projects are in the darker hue. Again out of the `r toString(n_projects)` projects concerning SDGs SDG-03 receives the most attention with a total of `r sum(pro2$`n`[pro2$name== "SDG-03"])` projects.
 
 ```{r}
 ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +

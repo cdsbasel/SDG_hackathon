@@ -2029,7 +2029,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2083,39 +2083,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h1 id="introduction">Introduction</h1>
 <p>In April 2021 the Center for Cognitive and Decision Science of the Unviversity of Basel conducted a UN Sustainability Development Goal Hackathon. The goal of this Hackathon was to identify to which sustainable development goals the research done by different organizational units contributes.</p>
-<p>In order to so, Sustainable development goals were detected in research output with a querry based approach. aurora etc.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img></p>
 <h2 id="data">Data</h2>
 <p>As the Hackathon was conducted as a request by the sustainability office of the University of Basel, the office provided a multiple databases containing information of the University’s historical electronic research output. Data was collected from the Research database, as well as from the Grants office database. Data contained not only publications made by researcher employed by the University of Basel but also projects (self funded and externally funded).</p>
-<p>18458 Articles were included, as well as 1040) projects. In total 5927 matches fitting to the search querries were found in publications and 375 were found in projects.</p>
+<p>18458 articles were included, as well as 1040 projects. In total 5927 matches fitting to the search querries were found in publications and 375 were found in projects. Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).</p>
 <h2 id="methodological">Methodological</h2>
-<p>Only Publications and Projects that were published or completed from 2010 to 2020 were included.The Query search</p>
-<p>Query search using Aurora (Link).</p>
-<p>Conducted using corpustools R package and translations of the queries.</p>
-<p>Choice of organizational unit</p>
+<p>Only publications and projects that were published or completed from 2010 to 2020 were included.The query search used was Aurora (Link) and Elsevier (Link). Abstracts for all publications were identified using corpustools R package. About 85% of abstracts could be retrieved.</p>
+<p>Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item. Using translations of the SDG queries of the Aurora network and the corpustools R package, detected wether titles or abstracts were SDG-relevant.</p>
 <h1 id="distribution-of-sdg">Distribution of SDG</h1>
-<p>Text including numbers computed using inline code: No. articles (18458), No. of projects (1040), No. of matches (any SDG) in both (publications: 5927; projects: 375).</p>
-<p>Text describing results in Figure.</p>
-<p>Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)</p>
+<p>The figure below shows the number of publications related to SDGs at the University of Basel. Of the 18458 publications a total of 5927 matched at least one of the SDGs. The highest number of matches (4604) can be seen for SDG-03, good health. A total of 289 publications deal with SDG-13, climate change.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="report_group_samuel_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
 </div>
+<p>The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the 375 projects concerning SDGs, SDG-03 receives the most attention with a total of 234 projects.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="report_group_samuel_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
 <h1 id="distribution-of-sdg-across-time">Distribution of SDG across Time</h1>
 <p>Only meaningful Elsevir</p>
 <h1 id="distribution-of-sdg-by-organizational-unit">Distribution of SDG by organizational unit</h1>
-<p>Text describing organizational units incl. inline computed numbers.</p>
-<p>Text describing results in Figure.</p>
-Figure showing frequency of SDGs by unit.
+<p>How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published 2911 publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="report_group_samuel_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="report_group_samuel_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<p>Interdisciplinarity (one unit versus multiple units?)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

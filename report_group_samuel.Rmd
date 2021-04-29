@@ -74,6 +74,15 @@ n_projects <- nrow(projects)
 n_matches_publications <- sum(pub$value)
 n_matches_projects <- sum(pro$value)
 
+# max publications with sdg organization
+pubs_by_orga <-  publications_all %>%
+  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>% summarise(sum(value))
+stph_pub <- max(pubs_by_orga$`sum(value)`)
+min_pub <- min(pubs_by_orga$`sum(value)`)
+#fbe_pub <- pubs_by_orga$`sum(value)`[pubs_by_orga$Organisations == "Org-Faculty"]
+
+
 
 ```
 
@@ -82,8 +91,6 @@ n_matches_projects <- sum(pro$value)
 
 In April 2021 the Center for Cognitive and Decision Science of the Unviversity of Basel conducted a UN Sustainability Development Goal Hackathon. The goal of this Hackathon was to identify to which sustainable development goals the research done by different organizational units contributes.
 
-In order to so, Sustainable development goals were detected in research output with a querry based approach. aurora etc. 
-
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
 
 ## Data
@@ -91,28 +98,21 @@ In order to so, Sustainable development goals were detected in research output w
 As the Hackathon was conducted as a request by the sustainability office of the University of Basel, the office provided a multiple databases containing information of the University’s historical electronic research output.
 Data was collected from the Research database, as well as from the Grants office database. Data contained not only publications made by researcher employed by the University of Basel but also projects (self funded and externally funded). 
 
-`r toString(n_publications)` Articles were included, as well as `r toString(n_projects)`) projects. In total  `r toString(n_matches_publications)` matches fitting to the search querries were found in publications and `r toString(n_matches_projects)` were found in projects. 
-Moreover, Publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
+`r toString(n_publications)` articles were included, as well as `r toString(n_projects)` projects. In total  `r toString(n_matches_publications)` matches fitting to the search querries were found in publications and `r toString(n_matches_projects)` were found in projects. 
+Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
 
 ## Methodological 
 
-Only Publications and Projects that were published or completed from 2010 to 2020 were included.The Query search used was Aurora (Link) and Elsevier (Link). Abstracts for all publications were identified using corpustools R package. About 85% of abstracts could be retrieved.SDG
+Only publications and projects that were published or completed from 2010 to 2020 were included.The query search used was Aurora (Link) and Elsevier (Link). Abstracts for all publications were identified using corpustools R package. About 85% of abstracts could be retrieved.
  
-Conducted using corpustools R package and translations of the queries.
-
-Choice of organizational unit
-
 Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item.
 Using translations of the SDG queries of the Aurora network and the corpustools R package, detected wether titles or abstracts were SDG-relevant.
 
 
 # Distribution of SDG
-Text including numbers computed using inline code: No. articles (`r toString(n_publications)`), No. of projects (`r toString(n_projects)`), No. of matches (any SDG) in both (publications: `r toString(n_matches_publications)`; projects: `r toString(n_matches_projects)`). 
 
-Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)
-
-The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r toString(n_projects)` publications a total of `r toString(n_matches_publications)` matched at least one of the SDGs. 
-The highest number of matches ( `r max(pub$value)` ) can be seen for SDG-03, good health. A total of `r pub[13,2]` publications deal with SDG-13, climate change.
+The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r toString(n_publications)` publications a total of `r toString(n_matches_publications)` matched at least one of the SDGs. 
+The highest number of matches (`r max(pub$value)`) can be seen for SDG-03, good health. A total of `r pub[13,2]` publications deal with SDG-13, climate change.
 
 
 ```{r}
@@ -131,11 +131,8 @@ ggplot(data = pub) +
     y = "Frequency"
   )
 ```
-Text describing results in Figure. 
 
-Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)
-
-The figure below shows the number of projects dealing with the SDGs. Externally funded projects are in a lighter hue and internally funded projects are in the darker hue. Again out of the `r toString(n_projects)` projects concerning SDGs SDG-03 receives the most attention with a total of `r sum(pro2$`n`[pro2$name== "SDG-03"])` projects.
+The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the `r toString(n_matches_projects)` projects concerning SDGs, SDG-03 receives the most attention with a total of `r sum(pro2$n[pro2$name== "SDG-03"])` projects.
 
 ```{r}
 ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +
@@ -156,21 +153,14 @@ ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, al
 ```
 
 
-
 # Distribution of SDG across Time
 
 Only meaningful Elsevir
 
 # Distribution of SDG by organizational unit
 
-Text describing organizational units incl. inline computed numbers. 
+How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published `r stph_pub` publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
 
-How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published `r stph_pub` publications in relation to SDGs, the Faculty of Business and Economics only published
-
-
-Text describing results in Figure. 
-
-Figure showing frequency of SDGs by unit.
 ```{r}
 ggplot(publications_total, aes(x= SDG, y=Organisations2, fill = value)) +
   geom_tile() +
@@ -204,6 +194,5 @@ ggplot(projects_test2, aes(x= SDG, y= Organisations2, fill = value)) +
 ```
 
 
-Interdisciplinarity (one unit versus multiple units?)
 
 

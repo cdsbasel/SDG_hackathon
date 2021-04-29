@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 # Introduction
@@ -55,6 +55,8 @@ sdg_publications_match <- nrow(sdg_publications_match)
 ```
 Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
 
+In the publications from Elsevier, there were a total of `r total_articles` articles and `r total_projects` projects. From these,  `r sdg_publications_match` articles matched at least one SDG. From the projects, `r sdg_project_match` articles matched at least one SDG. From the publications, `r sdg_publications_match` matched at least one SDG.
+
 Text describing results in Figure. 
 
 Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)
@@ -66,6 +68,27 @@ Only meaningful Elsevir
 # Distribution of SDG by organizational unit
 
 Text describing organizational units incl. inline computed numbers. 
+
+For the publications, we identified 15 organisational units, which published a total of ... articles which matched at least one SDG. The organization with the most articles were ...
+For the projects, we identified 13 organisational units, which were involved in a total of ...projects which matched at least one SDG. The organization with the most projects were ...
+
+
+```{r}
+publications_org <- publications_sdg_elsevier %>%
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
+  filter(match == TRUE & value == TRUE) %>%
+  group_by(Organisations) %>%
+  count()
+
+
+projects_org <- projects_sdg_elsevier %>%
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
+  filter(match == TRUE & value == TRUE) %>%
+  group_by(Organisations) %>%
+  count() 
+
+```
+
 
 Text describing results in Figure. 
 

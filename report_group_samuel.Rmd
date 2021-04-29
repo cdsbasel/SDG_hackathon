@@ -60,6 +60,8 @@ projects_test2 <- projects_test %>%
   pivot_longer(`SDG-01-Elsevier` : `SDG-16-Elsevier`, names_to = "SDG") %>% 
   group_by(Organisations) %>% 
   mutate(value = value/sum(value))
+projects_test2$SDG <-substring(projects_test2$SDG,1,6)
+projects_test2$Organisations2 <-substring(projects_test2$Organisations,5,)
 
 ###### prepare numbers to include in the text
 # No. articles
@@ -157,7 +159,7 @@ Text describing results in Figure.
 
 Figure showing frequency of SDGs by unit.
 ```{r}
-ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
+ggplot(publications_total, aes(x= SDG, y=Organisations2, fill = value)) +
   geom_tile() +
   theme_minimal() +
   scale_fill_viridis_c() +
@@ -172,7 +174,7 @@ ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
 ```
 
 ```{r}
-ggplot(projects_test2, aes(x= SDG, y= Organisations, fill = value)) +
+ggplot(projects_test2, aes(x= SDG, y= Organisations2, fill = value)) +
   geom_tile() +
   theme_minimal() +
   scale_fill_viridis_c() +

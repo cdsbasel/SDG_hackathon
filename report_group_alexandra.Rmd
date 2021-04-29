@@ -13,7 +13,10 @@ output:
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(ggtext)
 knitr::opts_chunk$set(echo = FALSE)
+projects_sdg <- read_csv("0_data/projects_sdg.csv")
+publications_sdg <- read_csv("0_data/publications_sdg.csv")
 ```
 
 # Introduction
@@ -24,14 +27,12 @@ Describe mission: Detect SDGs in research output of the University of Basel per 
 
 ### Data
 ```{r, echo = F}
-projects_sdg <- read_csv("0_data/projects_sdg.csv")
-publications_sdg <- read_csv("0_data/publications_sdg.csv")
 projects_sdg_elsevier <- projects_sdg %>% select(lead:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% 
   pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
 publications_sdg_elsevier <- publications_sdg %>% select(type:doc_id, `SDG-01-Elsevier`:`SDG-16-Elsevier`) %>% filter(type == "article") %>% pivot_longer(cols = `SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG", values_to = "match")
 ```
 
-Research database & Grants office database
+### Research database & Grants office database
 
 Three files correspinding to different research items: publications, projects (self funded), projects (externally funded)
 
@@ -56,23 +57,95 @@ sdg_project_match <- nrow(sdg_project_match)
 sdg_publications_match <- publications_sdg_elsevier %>% group_by(doc_id) %>% summarise(sum_match = sum(match)) %>% filter(sum_match > 0)
 sdg_publications_match <- nrow(sdg_publications_match)
 ```
-Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
 
-Text describing results in Figure. 
 
-Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora & Elsevier)
-```{r, echo = F, fig.height=10, fig.width= 10}
+The figures below show to percentage of articles published and projects conducted at UNIBAS (externally or internally funded) target different SDGs. SDG #3 is the most studied SDG. 
+
+```{r, echo = F, fig.height=25, fig.width= 15}
 projects_sdg_elsevier_summary <- projects_sdg_elsevier %>% group_by(SDG,type) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/total_projects))
-publication_sdg_elsevier_summary <- publications_sdg_elsevier %>% group_by(SDG) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/sdg_publications_match))
+publication_sdg_elsevier_summary <- publications_sdg_elsevier %>% group_by(SDG) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/total_articles))
+labels <- c(`SDG-01-Elsevier` = "<img src='assets/E_SDG_PRINT-01.jpg'
+    width='100' />",`SDG-02-Elsevier` = "<img src='assets/E_SDG_PRINT-02.jpg'
+    width='100' />",`SDG-03-Elsevier` = "<img src='assets/E_SDG_PRINT-03.jpg'
+    width='100' />",`SDG-04-Elsevier` = "<img src='assets/E_SDG_PRINT-04.jpg'
+    width='100' />",`SDG-05-Elsevier` = "<img src='assets/E_SDG_PRINT-05.jpg'
+    width='100' />",`SDG-06-Elsevier` = "<img src='assets/E_SDG_PRINT-06.jpg'
+    width='100' />",`SDG-07-Elsevier` = "<img src='assets/E_SDG_PRINT-07.jpg'
+    width='100' />",`SDG-08-Elsevier` = "<img src='assets/E_SDG_PRINT-08.jpg'
+    width='100' />",`SDG-09-Elsevier` = "<img src='assets/E_SDG_PRINT-09.jpg'
+    width='100' />",`SDG-10-Elsevier` = "<img src='assets/E_SDG_PRINT-10.jpg'
+    width='100' />",`SDG-11-Elsevier` = "<img src='assets/E_SDG_PRINT-11.jpg'
+    width='100' />", `SDG-12-Elsevier` = "<img src='assets/E_SDG_PRINT-12.jpg'
+    width='100' />",`SDG-13-Elsevier` = "<img src='assets/E_SDG_PRINT-13.jpg'
+    width='100' />",`SDG-14-Elsevier` = "<img src='assets/E_SDG_PRINT-14.jpg'
+    width='100' />",`SDG-15-Elsevier` = "<img src='assets/E_SDG_PRINT-15.jpg'
+    width='100' />",`SDG-16-Elsevier` = "<img src='assets/E_SDG_PRINT-16.jpg'
+    width='100' />")
 
-publication_sdg_elsevier_summary %>%  ggplot() + geom_bar(aes(y = SDG, x = prop_sdg), stat = "identity") +  labs(title = "Frequency of SDG matches by SDG")
+theme_set(theme_minimal(base_family = "Helvetica", base_size = 18))
+publication_sdg_elsevier_summary %>%  ggplot() + geom_bar(aes(y = reorder(SDG,prop_sdg), x = prop_sdg, fill = SDG), color = "grey", stat = "identity") + 
+  labs(title = "Percentage of articles that target a specific SDG", x = "% of articles", y = "",
+       subtitle = "As a percentage of the total number of articles",caption = "Data from the UNIBAS Research Database") + scale_fill_manual(values = c("#FC101E", "#CF9F02","#30D503","#C70B27","#FF2017","#32EDE8","#FFB001","#840038", "#FF4B0B", "#F013E8", "#FF8F1A", "#CD8200", "#398E12", "#0F97F0", "#42F506", "#0949BE", "#0B228D")) +
+  theme(legend.position = "none", plot.title = element_text(size = 30)) +  scale_y_discrete(name = NULL,labels = labels)  + theme(
+    axis.text.y = element_markdown(color = "black"), axis.title.x = element_text(size = 20, face = "bold"),axis.text.x = element_text(size = 16), plot.title = element_text(size = 30, hjust = 0.5,face = "bold"), plot.subtitle = element_text(size = 24, hjust = 0.5,face = "italic"))
+
+
 ```
 
+<!-- ```{r, echo = F, fig.height=25, fig.width= 15} -->
+<!--  projects_sdg_elsevier_summary %>%  ggplot() + geom_bar(aes(y = reorder(SDG,prop_sdg), x = prop_sdg, fill = SDG), color = "grey", stat = "identity") + -->
+<!--   labs(title = "Percentage of projects that target a specific SDG", x = "% of articles", y = "", -->
+<!--        subtitle = "As a percentage of the total number of projects",caption = "Data from the UNIBAS Research Database") + scale_fill_manual(values = c("#FC101E", "#CF9F02","#30D503","#C70B27","#FF2017","#32EDE8","#FFB001","#840038", "#FF4B0B", "#F013E8", "#FF8F1A", "#CD8200", "#398E12", "#0F97F0", "#42F506", "#0949BE", "#0B228D")) + -->
+<!--   theme(legend.position = "none", plot.title = element_text(size = 30)) +  scale_y_discrete(name = NULL,labels = labels)  + theme( -->
+<!-- axis.text.y = element_markdown(color = "black"), axis.title.x = element_text(size = 20, face = "bold"),axis.text.x = element_text(size = 16), plot.title = element_text(size = 30, hjust = 0.5,face = "bold"), plot.subtitle = element_text(size = 24, hjust = 0.5,face = "italic")) + facet_wrap(.~ type, ncol = 1) -->
+<!-- ``` -->
 
+# Distribution of SDG across Time 
 
-# Distribution of SDG across Time
+```{r, echo = F, warning==FALSE, message=FALSE}
+# for project
+projects_sdg <- read_csv("0_data/projects_sdg.csv")
+projects_summary <- projects_sdg %>% 
+  select(year, `SDG-01-Elsevier`:`SDG-16-Elsevier`)  %>%
+  group_by(year)  %>%
+  summarise_all(sum)
 
-Only meaningful Elsevir
+projects_summary_long <- projects_summary %>%
+  pivot_longer(starts_with("SDG"), names_to="SDG",values_to="count")
+
+projects_summary_long$year <- as.factor(projects_summary_long$year)
+
+ggplot(projects_summary_long, aes(x=SDG, y=year, fill=count))+
+  geom_tile()+
+  theme_minimal()+
+  scale_fill_viridis_c()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank()) +
+  labs(title = "Count of SDG project by Year")
+
+# for publications
+publications_sdg <- read_csv("0_data/publications_sdg.csv")
+publications_summary <- publications_sdg %>%
+  select(year, `SDG-01-Elsevier`:`SDG-16-Elsevier`)  %>%
+  group_by(year)  %>%
+  summarise_all(sum)
+
+publications_summary_long <- publications_summary %>%
+  pivot_longer(starts_with("SDG"), names_to="SDG",values_to="count")
+
+publications_summary_long$year <- as.factor(publications_summary_long$year)
+
+ggplot(publications_summary_long, aes(x=SDG, y=year, fill=count))+
+  geom_tile()+
+  theme_minimal()+
+  scale_fill_viridis_c()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank()) +
+  labs(title = "Count of SDG publications by Year")
+```
+
 
 # Distribution of SDG by organizational unit
 

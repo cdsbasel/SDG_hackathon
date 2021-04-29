@@ -2091,7 +2091,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>Research database &amp; Grants office database</p>
+<h3 id="research-database-grants-office-database">Research database &amp; Grants office database</h3>
 <p>Three files correspinding to different research items: publications, projects (self funded), projects (externally funded)</p>
 <h3 id="methodological">Methodological</h3>
 <p>Limit to 2010 to 2020</p>
@@ -2102,14 +2102,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both.</p>
-<p>Text describing results in Figure.</p>
-Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project), and system (Aurora &amp; Elsevier)
+<p>The figures below show to percentage of articles published and projects conducted at UNIBAS (externally or internally funded) target different SDGs. SDG #3 is the most studied SDG.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<p><img src="report_group_alexandra_files/figure-html5/unnamed-chunk-3-1.png" width="1440" /></p>
 </div>
+<!-- ```{r, echo = F, fig.height=25, fig.width= 15} -->
+<!--  projects_sdg_elsevier_summary %>%  ggplot() + geom_bar(aes(y = reorder(SDG,prop_sdg), x = prop_sdg, fill = SDG), color = "grey", stat = "identity") + -->
+<!--   labs(title = "Percentage of projects that target a specific SDG", x = "% of articles", y = "", -->
+<!--        subtitle = "As a percentage of the total number of projects",caption = "Data from the UNIBAS Research Database") + scale_fill_manual(values = c("#FC101E", "#CF9F02","#30D503","#C70B27","#FF2017","#32EDE8","#FFB001","#840038", "#FF4B0B", "#F013E8", "#FF8F1A", "#CD8200", "#398E12", "#0F97F0", "#42F506", "#0949BE", "#0B228D")) + -->
+<!--   theme(legend.position = "none", plot.title = element_text(size = 30)) +  scale_y_discrete(name = NULL,labels = labels)  + theme( -->
+<!-- axis.text.y = element_markdown(color = "black"), axis.title.x = element_text(size = 20, face = "bold"),axis.text.x = element_text(size = 16), plot.title = element_text(size = 30, hjust = 0.5,face = "bold"), plot.subtitle = element_text(size = 24, hjust = 0.5,face = "italic")) + facet_wrap(.~ type, ncol = 1) -->
+<!-- ``` -->
 <h1 id="distribution-of-sdg-across-time">Distribution of SDG across Time</h1>
-<p>Only meaningful Elsevir</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="report_group_alexandra_files/figure-html5/warning==FALSE-1.png" width="624" /><img src="report_group_alexandra_files/figure-html5/warning==FALSE-2.png" width="624" /></p>
+</div>
 <h1 id="distribution-of-sdg-by-organizational-unit">Distribution of SDG by organizational unit</h1>
 <p>Text describing organizational units incl. inline computed numbers.</p>
 <p>Text describing results in Figure.</p>

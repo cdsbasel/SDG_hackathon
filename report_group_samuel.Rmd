@@ -165,6 +165,7 @@ Only meaningful Elsevir
 
 Text describing organizational units incl. inline computed numbers. 
 
+How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published `r stph_pub` publications in relation to SDGs, the Faculty of Business and Economics only published
 
 
 Text describing results in Figure. 

@@ -1,6 +1,6 @@
 ---
 title: "Unibas SDG Report"
-description: |
+description: null
 ---
 
 ```{r setup, include=FALSE}
@@ -26,6 +26,9 @@ pro = projects %>%
   as_tibble() %>% 
   pivot_longer(everything()) %>% 
   mutate(item_type = "publication")
+
+pro = projects %>% pivot_longer(45:59 )
+pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
 
 # for plot org-unit/sdg
 publications_all <- publications %>%
@@ -106,8 +109,8 @@ ggplot(data = pub) +
 ```
 
 ```{r}
-ggplot(data = pro) +
-  geom_col(mapping = aes(x = name, y = value, fill = name)) +
+ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +
+  geom_bar(stat = "identity", position = "dodge", col = "white") +
   theme_minimal() +
   scale_fill_viridis_d() +
   theme(
@@ -119,7 +122,8 @@ ggplot(data = pro) +
     subtitle = "Number of projects related to SDGs at University of Basel",
     x = "SDG",
     y = "Frequency"
-  )
+  ) +
+  scale_alpha_discrete( range = c(0.5, 1))
 ```
 
 

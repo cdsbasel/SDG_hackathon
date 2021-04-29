@@ -91,22 +91,23 @@ In order to so, Sustainable development goals were detected in research output w
 As the Hackathon was conducted as a request by the sustainability office of the University of Basel, the office provided a multiple databases containing information of the University’s historical electronic research output.
 Data was collected from the Research database, as well as from the Grants office database. Data contained not only publications made by researcher employed by the University of Basel but also projects (self funded and externally funded). 
 
-`r toString(n_publications)` Articles were included, as well as `r toString(n_projects)`) projects. In total  `r toString(n_matches_publications)` matches fitting to the search querries were found in publications and `r toString(n_matches_projects)` were found in projects.  
+`r toString(n_publications)` Articles were included, as well as `r toString(n_projects)`) projects. In total  `r toString(n_matches_publications)` matches fitting to the search querries were found in publications and `r toString(n_matches_projects)` were found in projects. 
+Moreover, Publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
 
 ## Methodological 
 
-Only Publications and Projects that were published or completed from 2010 to 2020 were included.The Query search  
-
-Query search using Aurora (Link). 
+Only Publications and Projects that were published or completed from 2010 to 2020 were included.The Query search used was Aurora (Link) and Elsevier (Link). Abstracts for all publications were identified using corpustools R package. About 85% of abstracts could be retrieved.SDG
  
 Conducted using corpustools R package and translations of the queries.
 
 Choice of organizational unit
 
+Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item.
+Using translations of the SDG queries of the Aurora network and the corpustools R package, detected wether titles or abstracts were SDG-relevant.
+
+
 # Distribution of SDG
 Text including numbers computed using inline code: No. articles (`r toString(n_publications)`), No. of projects (`r toString(n_projects)`), No. of matches (any SDG) in both (publications: `r toString(n_matches_publications)`; projects: `r toString(n_matches_projects)`). 
-
-Text describing results in Figure. 
 
 Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)
 

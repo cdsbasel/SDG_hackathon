@@ -57,6 +57,18 @@ projects_test2 <- projects_test %>%
   group_by(Organisations) %>% 
   mutate(value = value/sum(value))
 
+###### prepare numbers to include in the text
+# No. articles
+n_publications <- nrow(publications)
+
+# No. of projects
+n_projects <- nrow(projects)
+
+# No. of matches (any SDG) in both.
+n_matches_publications <- sum(pub$value)
+n_matches_projects <- sum(pro$value)
+
+
 ```
 
 
@@ -84,8 +96,7 @@ Conducted using corpustools R package and translations of the queries.
 Choice of organizational unit
 
 # Distribution of SDG
-
-Text including numbers computed using inline code: No. articles, No. of projects, No. of matches (any SDG) in both. 
+Text including numbers computed using inline code: No. articles (`r toString(n_publications)`), No. of projects (`r toString(n_projects)`), No. of matches (any SDG) in both (publications: `r toString(n_matches_publications)`; projects: `r toString(n_matches_projects)`). 
 
 Text describing results in Figure. 
 
@@ -135,6 +146,8 @@ Only meaningful Elsevir
 # Distribution of SDG by organizational unit
 
 Text describing organizational units incl. inline computed numbers. 
+
+
 
 Text describing results in Figure. 
 

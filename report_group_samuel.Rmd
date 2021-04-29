@@ -19,6 +19,7 @@ pub = publications %>%
   as_tibble() %>% 
   pivot_longer(everything()) %>% 
   mutate(item_type = "publication")
+pub$name <-substring(pub$name,1,6)
 
 pro = projects %>% 
   select(starts_with("SDG") & ends_with("Elsevier")) %>% 
@@ -29,6 +30,7 @@ pro = projects %>%
 
 pro = projects %>% pivot_longer(45:59 )
 pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
+pro2$name <-substring(pro2$name,1,6)
 
 # for plot org-unit/sdg
 publications_all <- publications %>%
@@ -42,6 +44,8 @@ publications_total <- publications_all %>%
   pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
   group_by(Organisations) %>%
   mutate(value = value/sum(value))
+publications_total$SDG <-substring(publications_total$SDG,1,6)
+publications_total$Organisations2 <-substring(publications_total$Organisations,5,)
 
 
 projects_test <- projects %>% 

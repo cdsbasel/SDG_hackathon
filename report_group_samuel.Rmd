@@ -1,18 +1,62 @@
 ---
 title: "Unibas SDG Report"
-description: |
+description: null
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-```
 
-```{r}
 library(tidyverse)
 
 # read data
 publications <- read_csv('0_data/publications_sdg.csv')
 projects <- read_csv('0_data/projects_sdg.csv')
+
+# count occurences
+pub = publications %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  colSums() %>% t() %>% 
+  as_tibble() %>% 
+  pivot_longer(everything()) %>% 
+  mutate(item_type = "publication")
+
+pro = projects %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  colSums() %>% t() %>% 
+  as_tibble() %>% 
+  pivot_longer(everything()) %>% 
+  mutate(item_type = "publication")
+
+pro = projects %>% pivot_longer(45:59 )
+pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
+
+# for plot org-unit/sdg
+publications_all <- publications %>%
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
+  filter(value == TRUE) %>%
+  group_by(Organisations) %>%
+  select(`SDG-01-Elsevier`:`SDG-16-Elsevier`) %>%
+  summarise_all(sum) 
+
+publications_total <- publications_all %>%
+  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>%
+  mutate(value = value/sum(value))
+
+
+projects_test <- projects %>% 
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>% 
+  filter(value == TRUE) %>% 
+  group_by(Organisations) %>% 
+  select(`SDG-01-Elsevier` : `SDG-16-Elsevier`) %>% 
+  summarise_all(sum) %>% 
+  ungroup() 
+
+projects_test2 <- projects_test %>%   
+  pivot_longer(`SDG-01-Elsevier` : `SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>% 
+  mutate(value = value/sum(value))
+
 ```
 
 
@@ -48,13 +92,6 @@ Text describing results in Figure.
 Figure showing frequency of SDG matches by SDG, output type (publication, self-funded project, externally-funded project)
 
 ```{r}
-
-# count occurences
-pub = publications %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything()) %>% mutate(type = "publication")
-pro = projects %>% select(starts_with("SDG")) %>% colSums() %>% t() %>% as_tibble() %>% pivot_longer(everything()) %>% mutate(type = "project")
-alltypes = bind_rows(pub, pro)
-
-# plot publication frequencies
 ggplot(data = pub) +
   geom_col(mapping = aes(x = name, y = value, fill = name)) +
   theme_minimal() +
@@ -69,9 +106,11 @@ ggplot(data = pub) +
     x = "SDG",
     y = "Frequency"
   )
+```
 
-ggplot(data = pro) +
-  geom_col(mapping = aes(x = name, y = value, fill = name)) +
+```{r}
+ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +
+  geom_bar(stat = "identity", position = "dodge", col = "white") +
   theme_minimal() +
   scale_fill_viridis_d() +
   theme(
@@ -83,9 +122,8 @@ ggplot(data = pro) +
     subtitle = "Number of projects related to SDGs at University of Basel",
     x = "SDG",
     y = "Frequency"
-  )
-
-
+  ) +
+  scale_alpha_discrete( range = c(0.5, 1))
 ```
 
 
@@ -101,6 +139,38 @@ Text describing organizational units incl. inline computed numbers.
 Text describing results in Figure. 
 
 Figure showing frequency of SDGs by unit.
+```{r}
+ggplot(publications_total, aes(x= SDG, y=Organisations, fill = value)) +
+  geom_tile() +
+  theme_minimal() +
+  scale_fill_viridis_c() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  labs(
+    title = "Proportion of SDG Publications by Organisation"
+  )
+```
+
+```{r}
+ggplot(projects_test2, aes(x= SDG, y= Organisations, fill = value)) +
+  geom_tile() +
+  theme_minimal() +
+  scale_fill_viridis_c() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  labs(
+    title = "Proportion of SDG Projects by Organisation",
+    x = "SDG",
+    y = "Organisation"
+  )
+```
+
 
 Interdisciplinarity (one unit versus multiple units?)
 

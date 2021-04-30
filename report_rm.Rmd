@@ -12,81 +12,15 @@ library(tidyverse)
 publications <- read_csv('0_data/publications_sdg.csv')
 projects <- read_csv('0_data/projects_sdg.csv')
 
-# count occurences
-pub = publications %>% 
-  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
-  colSums() %>% t() %>% 
-  as_tibble() %>% 
-  pivot_longer(everything()) %>% 
-  mutate(item_type = "publication")
-pub$name <-substring(pub$name,1,6)
-
-pro = projects %>% 
-  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
-  colSums() %>% t() %>% 
-  as_tibble() %>% 
-  pivot_longer(everything()) %>% 
-  mutate(item_type = "publication")
-
-pro = projects %>% pivot_longer(45:59 )
-pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
-pro2$name <-substring(pro2$name,1,6)
-
-# for plot org-unit/sdg
-publications_all <- publications %>%
-  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
-  filter(value == TRUE) %>%
-  group_by(Organisations) %>%
-  select(`SDG-01-Elsevier`:`SDG-16-Elsevier`) %>%
-  summarise_all(sum) 
-
-publications_total <- publications_all %>%
-  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
-  group_by(Organisations) %>%
-  mutate(value = value/sum(value))
-publications_total$SDG <-substring(publications_total$SDG,1,6)
-publications_total$Organisations2 <-substring(publications_total$Organisations,5,)
-
-
-projects_test <- projects %>% 
-  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>% 
-  filter(value == TRUE) %>% 
-  group_by(Organisations) %>% 
-  select(`SDG-01-Elsevier` : `SDG-16-Elsevier`) %>% 
-  summarise_all(sum) %>% 
-  ungroup() 
-
-projects_test2 <- projects_test %>%   
-  pivot_longer(`SDG-01-Elsevier` : `SDG-16-Elsevier`, names_to = "SDG") %>% 
-  group_by(Organisations) %>% 
-  mutate(value = value/sum(value))
-projects_test2$SDG <-substring(projects_test2$SDG,1,6)
-projects_test2$Organisations2 <-substring(projects_test2$Organisations,5,)
-
-###### prepare numbers to include in the text
-# No. articles
-n_publications <- nrow(publications)
-
-# No. of projects
-n_projects <- nrow(projects)
-
-# No. of matches (any SDG) in both.
-n_matches_publications <- sum(pub$value)
-n_matches_projects <- sum(pro$value)
-
-# max publications with sdg organization
-pubs_by_orga <-  publications_all %>%
-  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
-  group_by(Organisations) %>% summarise(sum(value))
-stph_pub <- max(pubs_by_orga$`sum(value)`)
-min_pub <- min(pubs_by_orga$`sum(value)`)
-#fbe_pub <- pubs_by_orga$`sum(value)`[pubs_by_orga$Organisations == "Org-Faculty"]
-
-
-
+# colors
+unibas_cols = c(mint = "#A5D7D2",
+         mint_hell = "#D2EBD9",
+         red = "#D20537",
+         anthra = "#2D373C",
+         anthra_hell = "#46505A")
+names(unibas_cols) = NULL
 ```
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
 
 ## Background
 
@@ -95,6 +29,10 @@ The United Nations’ Sustainable Development Goals (SDGs) have become an import
 As a consequence, the past years have seen the development of new procedures to monitor the educational and research contributions of higher-education institutions to the Sustainable Development Goals (SDGs). These approaches have been so far spearheaded by for-profit organizations with methodologies that are only partly publicly available. 
 
 The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs), while making results and methodology publicly available. 
+
+<center>
+<img src="assets/sdgs.png" style="width:100%"></img><br><font style="font-size:12px">Source: <a href="https://upload.wikimedia.org/wikipedia">wikimedia.org</a></font>
+</center>
 
 ## Team
 
@@ -121,86 +59,95 @@ WHERE ARE THESE COMING FROM? HOW DO THESE RELATE TO THE CA. 18.000 pubs WE ANALY
 
 # Distribution of SDG
 
-The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r toString(n_publications)` publications a total of `r toString(n_matches_publications)` matched at least one of the SDGs. 
-The highest number of matches (`r max(pub$value)`) can be seen for SDG-03, good health. A total of `r pub[13,2]` publications deal with SDG-13, climate change.
-
-
 ```{r}
-ggplot(data = pub) +
-  geom_col(mapping = aes(x = name, y = value, fill = name)) +
-  theme_minimal() +
-  scale_fill_viridis_d() +
-  theme(
-    legend.position = "none",
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  labs(
-    title = "SDG Frequencies",
-    subtitle = "Number of publications related to SDGs at University of Basel",
-    x = "SDG",
-    y = "Frequency"
-  )
+
+pub = publications %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  summarize_all(sum) %>% 
+  pivot_longer(everything(), values_to = "count") %>% 
+  mutate(item_type = "publication",
+         name = substring(name,5,6),
+         prop = count/sum(count))
+
+pro = projects %>% 
+  select(type, starts_with("SDG") & ends_with("Elsevier")) %>% 
+  group_by(type) %>% 
+  summarize_all(sum) %>% 
+  pivot_longer(-1, values_to = "count") %>% 
+  rename(item_type = type) %>% 
+  group_by(item_type) %>% 
+  mutate(name = substring(name,5,6),
+         prop = count/sum(count)) %>% 
+  ungroup()
+
+
+counts = c(11323, 93390,3349291,25550,35625, 46074,383354,89498,
+           39114, 47227, 141331, 84127, 180102, 104532, 111202, 169330)
+
+elsevier = tibble(item_type = "reference",name = pub$name, 
+                  count = counts, prop = counts / sum(counts))
+
+sdg_props = pub %>% bind_rows(pro) %>% 
+  mutate(item_type = as_factor(item_type)) %>% 
+  rename(`Research item` = item_type)
+levels(sdg_props$`Research item`) = c("Publication", "Projects (external)", "Projects (internal)")
+
+
 ```
 
-The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the `r toString(n_matches_projects)` projects concerning SDGs, SDG-03 receives the most attention with a total of `r sum(pro2$n[pro2$name== "SDG-03"])` projects.
+The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r nrow(publications)` publications a total of `r sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. 
+The highest number of matches (`r max(pub$count)`) can be seen for SDG-03, good health. A total of `r pub$count[pub$name == "13"]` publications deal with SDG-13, climate change.
+
+The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the `r nrow(projects)` projects concerning SDGs, SDG-03 receives the most attention with a total of `r sum(pro$count[pro$name == "03"])` projects.
 
 ```{r}
-ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +
-  geom_bar(stat = "identity", position = "dodge", col = "white") +
-  theme_minimal() +
-  scale_fill_viridis_d() +
-  theme(
-    legend.position = "none",
-    axis.text.x = element_text(angle = 45, hjust = 1)
-  ) +
-  labs(
-    title = "SDG Frequencies",
-    subtitle = "Number of projects related to SDGs at University of Basel",
-    x = "SDG",
-    y = "Frequency"
-  ) +
-  scale_alpha_discrete( range = c(0.5, 1))
+# count occurences
+
+ggplot(sdg_props, aes(x = name, y = prop)) + 
+  geom_bar(stat = 'identity', position = "dodge", mapping = aes(fill = `Research item`)) + 
+  geom_segment(data = elsevier %>% mutate(x = (1:16)-.45, xend = (1:16)+.45), 
+               mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .3) +
+  theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
+  labs(x = "Sustainable development goal", y = "Relative frequency") + 
+  theme(legend.position = "top")
+
 ```
 
-
-# Distribution of SDG across Time
-
-Only meaningful Elsevir
 
 # Distribution of SDG by organizational unit
 
-How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published `r stph_pub` publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
+How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published XXX publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
 
 ```{r}
-ggplot(publications_total, aes(x= SDG, y=Organisations2, fill = value)) +
-  geom_tile() +
-  theme_minimal() +
-  scale_fill_viridis_c() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank()
-  ) +
-  labs(
-    title = "Proportion of SDG Publications by Organisation"
-  )
-```
+cnts = publications %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  rowSums()
 
-```{r}
-ggplot(projects_test2, aes(x= SDG, y= Organisations2, fill = value)) +
-  geom_tile() +
-  theme_minimal() +
-  scale_fill_viridis_c() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank()
-  ) +
-  labs(
-    title = "Proportion of SDG Projects by Organisation",
-    x = "SDG",
-    y = "Organisation"
-  )
+org_cnts = sapply(publications %>% select(starts_with("Org-")), function(x) sum(cnts[x]))
+
+orgs = names(org_cnts[org_cnts>50])
+
+org_sdg_prop = publications %>% 
+  pivot_longer(starts_with("Org-"), names_to = "Unit", values_to = "present") %>%
+  filter(present, Unit %in% orgs) %>% 
+  group_by(Unit) %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  summarize_all(sum) %>% 
+  ungroup() %>% 
+  pivot_longer(-1, names_to = "sdg", values_to = "count") %>% 
+  group_by(Unit) %>% 
+  mutate(Proportion = count / sum(count),
+         sdg = str_sub(sdg, 5, 6),
+         Unit = paste0(str_replace(Unit, "Org-",""), "\n(n = ", org_cnts[Unit], ")"))
+
+ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() + 
+  scale_fill_gradient(low = unibas_cols[4], high = unibas_cols[1]) + 
+  guides(fill = F) +
+  labs(x = "Sustainable development goal", 
+       y = "",
+       title = "Unibas organizational units",
+       subtitle = "SDG-related research stratified by organizational unit",
+       caption = "Note: Limited to organizational units with at least 50 matches.")
 ```
 
 

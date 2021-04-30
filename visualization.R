@@ -48,7 +48,10 @@ ggplot(sdg_props, aes(x = name, y = value)) +
   geom_segment(data = elsevier %>% mutate(x = (1:16)-.45, xend = (1:16)+.45), 
                mapping = aes(x = x, xend=xend, y = value, yend=value), col = unibas_cols[3], size = .3) +
   theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
-  labs(x = "Sustainable development goal", y = "Relative frequency")
+  labs(x = "Sustainable development goal", y = "Relative frequency",
+       title = "SDG Overview",
+       subtitle = "SDG-matches in publications, self- and externally-funded research projects",
+       caption = "Note: Red reference lines corresponds to numbers presented in a recent Elsevier report.")
 
 
 
@@ -57,29 +60,31 @@ cnts = publications %>%
   select(starts_with("SDG") & ends_with("Elsevier")) %>% 
   rowSums()
 
+org_cnts = sapply(publications %>% select(starts_with("Org-")), function(x) sum(cnts[x]))
+
+orgs = names(org_cnts[org_cnts>50])
+
+org_sdg_prop = publications %>% 
+  pivot_longer(starts_with("Org-"), names_to = "Unit", values_to = "present") %>%
+  filter(present, Unit %in% orgs) %>% 
+  group_by(Unit) %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  summarize_all(sum) %>% 
+  ungroup() %>% 
+  pivot_longer(-1, names_to = "sdg", values_to = "count") %>% 
+  group_by(Unit) %>% 
+  mutate(prop = count / sum(count),
+         sdg = str_sub(sdg, 5, 6),
+         Unit = paste0(str_replace(Unit, "Org-",""), "\n(n = ", org_cnts[Unit], ")"))
+
+ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = prop)) + geom_tile() + 
+  scale_fill_gradient(low = unibas_cols[4], high = unibas_cols[1]) + 
+  guides(fill = F) + 
+  labs(x = "Sustainable development goal", 
+       y = "",
+       title = "Unibas organizational units",
+       subtitle = "SDG-related research stratified by organizational unit",
+       caption = "Note: Limited to organizational units with at least 50 matches.")
 
 
 
-
-
-
-
-
-pro = projects %>% pivot_longer(45:59 )
-pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
-pro2$name <-substring(pro2$name,1,6)
-
-# for plot org-unit/sdg
-publications_all <- publications %>%
-  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
-  filter(value == TRUE) %>%
-  group_by(Organisations) %>%
-  select(`SDG-01-Elsevier`:`SDG-16-Elsevier`) %>%
-  summarise_all(sum) 
-
-publications_total <- publications_all %>%
-  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
-  group_by(Organisations) %>%
-  mutate(value = value/sum(value))
-publications_total$SDG <-substring(publications_total$SDG,1,6)
-publications_total$Organisations2 <-substring(publications_total$Organisations,5,)

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 This is the home of the **Sustainable Development Goals (SDGs) Hackathon**. 
 
-The hackathon is the result of a partnership the [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel to obtain an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs).
+The hackathon is the result of a partnership between the [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel to obtain an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs).
 
 Learn about our results of by reading our [Report](report.html). More information about the [hackathon](hackathon.html) and [data](data.html) can be found in the respective pages. 
 

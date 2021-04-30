@@ -95,7 +95,7 @@ Of the `r nrow(publications)` **publications** in English for which a title and 
 
 A similar pattern was found for **projects**: Out of the `r nrow(projects)` projects, a total of `r sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. SDG-03, *"Good health and well-being"*, received the most hits with a total of `r sum(pro$count[pro$name == "03"])` projects. In turn, SDG-16, *"Peace, Justice, and Strong Institutions"*, and SDG-13, *"Climate action"*, received about a similar number of matches, with a total of `r sum(pro$count[pro$name == "16"])` and `r sum(pro$count[pro$name == "13"])` projects, respectively.
  
-The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database (Elsevier, 2020). 
+The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database [(Elsevier, 2020)](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf) . 
 
 ```{r, fig.height=6}
 # count occurences
@@ -115,9 +115,9 @@ ggplot(sdg_props, aes(x = name, y = prop)) +
 
 ## Distribution of SDGs by Organizational Unit
 
-How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published XXX publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
+How are publications and projects from different organizational units of the University of Basel contributing to the SDGs? The amounts of publications and projects with SDG contributions differ somewhat between organizational units, but several seem to have a stronger contribution to SDG-03, *"Good health and well-being"*, relative to other SDGs.
 
-```{r}
+```{r, fig.height=6}
 cnts = publications %>% 
   select(starts_with("SDG") & ends_with("Elsevier")) %>% 
   rowSums()
@@ -146,14 +146,14 @@ ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() +
        y = "",
        title = "Unibas organizational units",
        subtitle = "SDG-related research stratified by organizational unit",
-       caption = "Note: Limited to organizational units with at least 50 matches.")
+       caption = "Note: Only organizational units with >50 matches shown.")
 ```
 
 
 ## References 
 
 Elsevier (2020). The Power of Data to Advance the SDGs: Mapping Research for the Sustainable Development Goals. 
-[https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)
+[https://www.elsevier.com](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)
 
 Jayabalasingham, B., Boverhof, R., Agnew, K., & Klein, L. (2019). Identifying research supporting the United Nations sustainable development goals. Mendeley Data. [http://dx.doi.org/10.17632/87txkw7khs.1](https://data.mendeley.com/datasets/87txkw7khs/1)
 

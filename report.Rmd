@@ -21,6 +21,9 @@ unibas_cols = c(mint = "#A5D7D2",
 names(unibas_cols) = NULL
 ```
 
+<center>
+<img src="assets/sdgs.png" style="width:100%"></img><br><font style="font-size:12px">The United Nation's Sustainable Development Goals, Source: <a href="https://upload.wikimedia.org/wikipedia">wikimedia.org</a></font>
+</center>
 
 ## Background
 
@@ -28,15 +31,11 @@ The United Nations’ Sustainable Development Goals (SDGs) have become an import
 
 As a consequence, the past years have seen the development of new procedures to monitor the educational and research contributions of higher-education institutions to the Sustainable Development Goals (SDGs). These approaches have been so far spearheaded by for-profit organizations with methodologies that are only partly publicly available. 
 
-The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs), while making results and methodology publicly available. 
-
-<center>
-<img src="assets/sdgs.png" style="width:100%"></img><br><font style="font-size:12px">Source: <a href="https://upload.wikimedia.org/wikipedia">wikimedia.org</a></font>
-</center>
+The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs) while making results and methodology publicly available. 
 
 ## Team
 
-The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions, collaborative hackathons, and online reporting that took place between March-May 2021.
+The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions, collaborative [hackathons](hackathon.html), and online reporting that took place March-May 2021.
 
 **MSc Students**: Nina Frings, Sophia Prix, ...
 
@@ -48,16 +47,13 @@ The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative
 
 The approach consisted of using established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
 
-The queries stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in R (R Core Team, 2021) using the corpustools package (Welbers & van Atteveldt, 2021). 
+The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). 
 
-The Sustainability Office provided data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications so these were retrieved using the Scopus API though the rscopus package (Muschelli, 2019). About 85% of abstracts could be retrieved in this fashion. 
-The research database included a number of organizational units that have changed across the past years. Faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) were manually identified by team members.
+The Sustainability Office provided data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases references several organizational units, with some having changed labels across the analysis period of 2010 to 2020. Consequently, team members categorized organizational units of the University of Basel manually.
 
-Only publications and projects that were published or completed from 2010 to 2020 were included in the analyses. 
+Only publications and projects that were published or completed from 2010 to 2020 and for which title and abstracts in English were available were included in the analyses. Additional information about the databases and related processing steps is provided in [Data](data.html). 
 
-WHERE ARE THESE COMING FROM? HOW DO THESE RELATE TO THE CA. 18.000 pubs WE ANALYZE? Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
-
-# Distribution of SDG
+## Distribution of SDGs
 
 ```{r}
 
@@ -95,29 +91,29 @@ levels(sdg_props$`Research item`) = c("Publication", "Projects (external)", "Pro
 
 ```
 
-The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r nrow(publications)` publications a total of `r sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. 
-The highest number of matches (`r max(pub$count)`) can be seen for SDG-03, good health. A total of `r pub$count[pub$name == "13"]` publications deal with SDG-13, climate change.
+Of the `r nrow(publications)` **publications** in English for which a title and abstract were available, a total of `r sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. The highest number of matches, `r max(pub$count)`, concerned SDG-03, *"Good health and well-being"*, with the second highest number of matches, with total of `r pub$count[pub$name == "13"]` publications, concerning SDG-13, *"Climate action"*. 
 
-The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the `r nrow(projects)` projects concerning SDGs, SDG-03 receives the most attention with a total of `r sum(pro$count[pro$name == "03"])` projects.
+A similar pattern was found for **projects**: Out of the `r nrow(projects)` projects, a total of `r sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. SDG-03, *"Good health and well-being"*, received the most hits with a total of `r sum(pro$count[pro$name == "03"])` projects. In turn, SDG-16, *"Peace, Justice, and Strong Institutions"*, and SDG-13, *"Climate action"*, received about a similar number of matches, with a total of `r sum(pro$count[pro$name == "16"])` and `r sum(pro$count[pro$name == "13"])` projects, respectively.
+ 
+The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database (Elsevier, 2020). 
 
-```{r}
+```{r, fig.height=6}
 # count occurences
 
 ggplot(sdg_props, aes(x = name, y = prop)) + 
   geom_bar(stat = 'identity', position = "dodge", mapping = aes(fill = `Research item`)) + 
   geom_segment(data = elsevier %>% mutate(x = (1:16)-.45, xend = (1:16)+.45), 
-               mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .3) +
+               mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .5) +
   theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
-  labs(x = "Sustainable development goal", y = "Relative frequency",
+  labs(x = "Goal", y = "Relative frequency",
        title = "SDG Overview",
-       subtitle = "SDG-matches in publications, self- and externally-funded research projects",
-       caption = "Note: Reference line shows numbers in 'The Power of Data to Advance the SDGs' by Elsevier.") +
+       subtitle = "SDG-matches in publications, externally- and internally-funded research projects",
+       caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020)") +
   theme(legend.position = "top")
 
 ```
 
-
-# Distribution of SDG by organizational unit
+## Distribution of SDGs by Organizational Unit
 
 How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published XXX publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
 
@@ -156,7 +152,8 @@ ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() +
 
 ## References 
 
-
+Elsevier (2020). The Power of Data to Advance the SDGs: Mapping Research for the Sustainable Development Goals. 
+[https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)
 
 Jayabalasingham, B., Boverhof, R., Agnew, K., & Klein, L. (2019). Identifying research supporting the United Nations sustainable development goals. Mendeley Data. [http://dx.doi.org/10.17632/87txkw7khs.1](https://data.mendeley.com/datasets/87txkw7khs/1)
 

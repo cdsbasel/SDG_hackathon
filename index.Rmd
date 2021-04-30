@@ -1,6 +1,6 @@
 ---
-title: "CDS Hackathon"
-description: "Identifying the UN Sustainable Development Goals in University of Basel research output"
+title: "Sustainable Development Goals (SDGs) Hackathon"
+description: "Mapping SDGs at the University of Basel"
 site: distill::distill_website
 ---
 
@@ -12,12 +12,15 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-This is the home of the 2021 UN Sustainability Development Goal Hackathon of the Center for Cognitive and Decision Sciences, University of Basel.
+This is the home of the **Sustainable Development Goals (SDGs) Hackathon**. 
 
-Learn more about the event on the <a href="data.html"><b>Data</b></a>, <a href="hackathon.html"><b>Hackathon</b></a>, and <a href="report.html"><b>Report</b></a> pages. 
+The hackathon is the result of a partnership the [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel to obtain an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs).
 
-<p align='center' style='font-size:10px'><img src='assets/sdgs.png' width=100%>
-<br> from <a href='https://en.unesco.org/sustainabledevelopmentgoals'>en.unesco.org</a></p>
+Learn about our results of by reading our [Report](report.html). More information about the [hackathon](hackathon.html) and [data](data.html) can be found in the respective pages. 
+
+<center>
+<img src="assets/sdgs.png" style="width:100%"></img><br><font style="font-size:12px">The United Nation's Sustainable Development Goals, Source: <a href="https://upload.wikimedia.org/wikipedia">wikimedia.org</a></font>
+</center>
 
 
 

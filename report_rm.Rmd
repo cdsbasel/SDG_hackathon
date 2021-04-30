@@ -1,0 +1,218 @@
+---
+title: "Research on Sustainability at the University of Basel"
+description: An overview of research on the Sustainable Development Goals (SDGs) at the University of Basel (2010-2020)
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+
+# read data
+publications <- read_csv('0_data/publications_sdg.csv')
+projects <- read_csv('0_data/projects_sdg.csv')
+
+# count occurences
+pub = publications %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  colSums() %>% t() %>% 
+  as_tibble() %>% 
+  pivot_longer(everything()) %>% 
+  mutate(item_type = "publication")
+pub$name <-substring(pub$name,1,6)
+
+pro = projects %>% 
+  select(starts_with("SDG") & ends_with("Elsevier")) %>% 
+  colSums() %>% t() %>% 
+  as_tibble() %>% 
+  pivot_longer(everything()) %>% 
+  mutate(item_type = "publication")
+
+pro = projects %>% pivot_longer(45:59 )
+pro2 <- pro %>% group_by(type,name, value) %>% tally() %>% filter(value == TRUE)
+pro2$name <-substring(pro2$name,1,6)
+
+# for plot org-unit/sdg
+publications_all <- publications %>%
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>%
+  filter(value == TRUE) %>%
+  group_by(Organisations) %>%
+  select(`SDG-01-Elsevier`:`SDG-16-Elsevier`) %>%
+  summarise_all(sum) 
+
+publications_total <- publications_all %>%
+  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>%
+  mutate(value = value/sum(value))
+publications_total$SDG <-substring(publications_total$SDG,1,6)
+publications_total$Organisations2 <-substring(publications_total$Organisations,5,)
+
+
+projects_test <- projects %>% 
+  pivot_longer(starts_with("Org-"), names_to = "Organisations") %>% 
+  filter(value == TRUE) %>% 
+  group_by(Organisations) %>% 
+  select(`SDG-01-Elsevier` : `SDG-16-Elsevier`) %>% 
+  summarise_all(sum) %>% 
+  ungroup() 
+
+projects_test2 <- projects_test %>%   
+  pivot_longer(`SDG-01-Elsevier` : `SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>% 
+  mutate(value = value/sum(value))
+projects_test2$SDG <-substring(projects_test2$SDG,1,6)
+projects_test2$Organisations2 <-substring(projects_test2$Organisations,5,)
+
+###### prepare numbers to include in the text
+# No. articles
+n_publications <- nrow(publications)
+
+# No. of projects
+n_projects <- nrow(projects)
+
+# No. of matches (any SDG) in both.
+n_matches_publications <- sum(pub$value)
+n_matches_projects <- sum(pro$value)
+
+# max publications with sdg organization
+pubs_by_orga <-  publications_all %>%
+  pivot_longer(`SDG-01-Elsevier`:`SDG-16-Elsevier`, names_to = "SDG") %>% 
+  group_by(Organisations) %>% summarise(sum(value))
+stph_pub <- max(pubs_by_orga$`sum(value)`)
+min_pub <- min(pubs_by_orga$`sum(value)`)
+#fbe_pub <- pubs_by_orga$`sum(value)`[pubs_by_orga$Organisations == "Org-Faculty"]
+
+
+
+```
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png"></img>
+
+## Background
+
+The United Nations’ Sustainable Development Goals (SDGs) have become an important guideline for higher-education institutions to monitor and plan their contributions to social, economic, and environmental transformations.
+
+As a consequence, the past years have seen the development of new procedures to monitor the educational and research contributions of higher-education institutions to the Sustainable Development Goals (SDGs). These approaches have been so far spearheaded by for-profit organizations with methodologies that are only partly publicly available. 
+
+The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs), while making results and methodology publicly available. 
+
+## Team
+
+The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions, collaborative hackathons, and online reporting that took place between March-May 2021.
+
+**MSc Students**: Nina Frings, Sophia Prix, ...
+
+**CDS Staff**: Alexandra Bagaini, Yun-Rui Liu, Samuel Aeschbach, ...
+
+**Coordination**: Dirk Wulff, Rui Mata 
+
+## Methods 
+
+The approach consisted of using established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
+
+The queries stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in R (R Core Team, 2021) using the corpustools package (Welbers & van Atteveldt, 2021). 
+
+The Sustainability Office provided data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications so these were retrieved using the Scopus API though the rscopus package (Muschelli, 2019). About 85% of abstracts could be retrieved in this fashion. 
+The research database included a number of organizational units that have changed across the past years. Faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) were manually identified by team members.
+
+Only publications and projects that were published or completed from 2010 to 2020 were included in the analyses, leading to `r toString(n_publications)` publications, as well as `r toString(n_projects)` projects. In total  `r toString(n_matches_publications)` matches for publications and `r toString(n_matches_projects)` for projects were found. 
+
+Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
+
+# Distribution of SDG
+
+The figure below shows the number of publications related to SDGs at the University of Basel. Of the `r toString(n_publications)` publications a total of `r toString(n_matches_publications)` matched at least one of the SDGs. 
+The highest number of matches (`r max(pub$value)`) can be seen for SDG-03, good health. A total of `r pub[13,2]` publications deal with SDG-13, climate change.
+
+
+```{r}
+ggplot(data = pub) +
+  geom_col(mapping = aes(x = name, y = value, fill = name)) +
+  theme_minimal() +
+  scale_fill_viridis_d() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(
+    title = "SDG Frequencies",
+    subtitle = "Number of publications related to SDGs at University of Basel",
+    x = "SDG",
+    y = "Frequency"
+  )
+```
+
+The figure below shows the number of projects dealing with the SDGs. Externally funded projects are presented in a lighter hue and internally funded projects are in the darker hue. Again, out of the `r toString(n_matches_projects)` projects concerning SDGs, SDG-03 receives the most attention with a total of `r sum(pro2$n[pro2$name== "SDG-03"])` projects.
+
+```{r}
+ggplot(data = pro2, mapping = aes(x = name, y = n, fill = name, group = type, alpha = type)) +
+  geom_bar(stat = "identity", position = "dodge", col = "white") +
+  theme_minimal() +
+  scale_fill_viridis_d() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(
+    title = "SDG Frequencies",
+    subtitle = "Number of projects related to SDGs at University of Basel",
+    x = "SDG",
+    y = "Frequency"
+  ) +
+  scale_alpha_discrete( range = c(0.5, 1))
+```
+
+
+# Distribution of SDG across Time
+
+Only meaningful Elsevir
+
+# Distribution of SDG by organizational unit
+
+How are publications and projects from different organizational units of the University of Basel contributing to SDGs? Generally, the amounts of publications/projects (with SDG contributions) differ greatly between organizational units. While the Swiss TPH published `r stph_pub` publications in relation to SDGs, other institutes did not publish anything in relation to SDGs.
+
+```{r}
+ggplot(publications_total, aes(x= SDG, y=Organisations2, fill = value)) +
+  geom_tile() +
+  theme_minimal() +
+  scale_fill_viridis_c() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  labs(
+    title = "Proportion of SDG Publications by Organisation"
+  )
+```
+
+```{r}
+ggplot(projects_test2, aes(x= SDG, y= Organisations2, fill = value)) +
+  geom_tile() +
+  theme_minimal() +
+  scale_fill_viridis_c() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  labs(
+    title = "Proportion of SDG Projects by Organisation",
+    x = "SDG",
+    y = "Organisation"
+  )
+```
+
+
+## References 
+
+
+
+Jayabalasingham, B., Boverhof, R., Agnew, K., & Klein, L. (2019). Identifying research supporting the United Nations sustainable development goals. Mendeley Data. [http://dx.doi.org/10.17632/87txkw7khs.1](https://data.mendeley.com/datasets/87txkw7khs/1)
+
+Muschelli, J. (2019). rscopus. R package version 0.6.6. [https://CRAN.R-project.org/package=rscopus](https://cran.r-project.org/web/packages/rscopus/)
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. [https://www.R-project.org/](https://www.R-project.org/)
+  
+Welbers, K. & van Atteveldt, W. (2021). corpustools: Managing, querying and analyzing tokenized text. R package version 0.4.7. [https://CRAN.R-project.org/package=corpustools](https://CRAN.R-project.org/package=corpustools)
+

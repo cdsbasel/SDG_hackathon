@@ -7,16 +7,25 @@ description: "Identifying the UN Sustainable Development Goals in University of 
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Setup
+
+The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions and two collaborative [hackathons](hackathon.html).
+
+**MSc Students**: Nina Frings, Sophia Prix, ...
+
+**CDS Staff**: Alexandra Bagaini, Yun-Rui Liu, Samuel Aeschbach, ...
+
+**Coordination**: Dirk Wulff, Rui Mata 
+
 ## Preliminaries
 
-Clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>. 
+Participants clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>. 
 
-
-## Part I - Visualizing
+## Part I - Visualizing (April 14th, 2021)
 
 #### Goal
 
-The goal of the first hackathon part is to produce three quality visulializations illustrating...
+The goal of the first hackathon part is to produce three quality visualizations illustrating...
 
 1. The frequency distribution of sustainable development goals detected in Unibas publications and projects. 
 2. The relationship between sustainable development goals. 
@@ -28,7 +37,15 @@ The goal of the first hackathon part is to produce three quality visulialization
 2. Each group creates three `.pdf` figure files in the `2_figures` folder. Figure files also must receive a suffix identifying the group. See example figure. 
 3. Pull before you Push.
 
-## Part II - Reporting
+## Part II - Reporting (April 29th, 2021)
 
-tba
+#### Goal
+
+The goal of the second hackathon part is to produce a report based on the visualizations produced in the first hackathon. 
+
+#### Rules
+
+1. Each group creates and works in a single R Markdown document that is given a unique name by the group. 
+
+2. Pull before you Push.
 

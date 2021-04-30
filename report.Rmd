@@ -33,23 +33,13 @@ As a consequence, the past years have seen the development of new procedures to 
 
 The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](www.cds.unibas.ch) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs) while making results and methodology publicly available. 
 
-## Team
-
-The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions, collaborative [hackathons](hackathon.html), and online reporting that took place March-May 2021.
-
-**MSc Students**: Nina Frings, Sophia Prix, ...
-
-**CDS Staff**: Alexandra Bagaini, Yun-Rui Liu, Samuel Aeschbach, ...
-
-**Coordination**: Dirk Wulff, Rui Mata 
-
 ## Methods 
 
 The approach consisted of using established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
 
-The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). 
+The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). We also conducted analysis using alternative queries from the <a href="https://aurora-network.global/project/sdg-analysis-bibliometrics-relevance/">Aurora </a> network but these provide considerably fewer matches overall and are not further discussed here. 
 
-The Sustainability Office provided data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases references several organizational units, with some having changed labels across the analysis period of 2010 to 2020. Consequently, team members categorized organizational units of the University of Basel manually.
+The Sustainability Office supplied data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases refer to several organizational units but labels differ across time and databases. Consequently, team members categorized organizational units manually.
 
 Only publications and projects that were published or completed from 2010 to 2020 and for which title and abstracts in English were available were included in the analyses. Additional information about the databases and related processing steps is provided in [Data](data.html). 
 
@@ -91,12 +81,13 @@ levels(sdg_props$`Research item`) = c("Publication", "Projects (external)", "Pro
 
 ```
 
-Of the `r nrow(publications)` **publications** in English for which a title and abstract were available, a total of `r sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. The highest number of matches, `r max(pub$count)`, concerned SDG-03, *"Good health and well-being"*, with the second highest number of matches, with total of `r pub$count[pub$name == "13"]` publications, concerning SDG-13, *"Climate action"*. 
+Of the `r nrow(publications)` **publications** in English for which a title and abstract were available, a total of `r sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` (`r round(sum((publications %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)/nrow(publications),2)*100`%) matched at least one of the SDGs. The highest number of matches, `r max(pub$count)`, concerned SDG-03, *"Good health and well-being"*, with the second highest number of matches, with total of `r pub$count[pub$name == "13"]` publications, concerning SDG-13, *"Climate action"*. 
 
-A similar pattern was found for **projects**: Out of the `r nrow(projects)` projects, a total of `r sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` matched at least one of the SDGs. SDG-03, *"Good health and well-being"*, received the most hits with a total of `r sum(pro$count[pro$name == "03"])` projects. In turn, SDG-16, *"Peace, Justice, and Strong Institutions"*, and SDG-13, *"Climate action"*, received about a similar number of matches, with a total of `r sum(pro$count[pro$name == "16"])` and `r sum(pro$count[pro$name == "13"])` projects, respectively.
+A similar pattern was found for **projects**: Out of the `r nrow(projects)` projects, a total of `r sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` (`r round(sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)/nrow(projects),2)*100`%) matched at least one of the SDGs. SDG-03, *"Good health and well-being"*, received the most matches, with a total of `r sum(pro$count[pro$name == "03"])` projects. In turn, SDG-16, *"Peace, Justice, and Strong Institutions"*, and SDG-13, *"Climate action"*, received about a similar number of matches, with a total of `r sum(pro$count[pro$name == "16"])` and `r sum(pro$count[pro$name == "13"])` projects, respectively.
  
-The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database [(Elsevier, 2020)](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf) . 
+The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database [(Elsevier, 2020)](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf). Overall, the results suggest that the pattern of SDG-related research at the University of Basel is overall similar to that of the global scientific output, perhaps with a somewhat larger focus on SDG-03, *"Good health and well-being"* concerning publications. 
 
+### SDG-matches in publications and projects
 ```{r, fig.height=6}
 # count occurences
 
@@ -105,18 +96,24 @@ ggplot(sdg_props, aes(x = name, y = prop)) +
   geom_segment(data = elsevier %>% mutate(x = (1:16)-.45, xend = (1:16)+.45), 
                mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .5) +
   theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
-  labs(x = "Goal", y = "Relative frequency",
-       title = "SDG Overview",
-       subtitle = "SDG-matches in publications, externally- and internally-funded research projects",
-       caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020)") +
-  theme(legend.position = "top")
+  theme(legend.position = "top") +
+  labs(x = "Sustainable development goal", y = "Relative frequency",
+       caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020)") 
+
+#  labs(x = "Goal", y = "Relative frequency",
+#       title = "SDG Overview",
+#       subtitle = "SDG-matches in publications, externally- and internally-funded research projects",
+#       caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020)") 
 
 ```
 
 ## Distribution of SDGs by Organizational Unit
 
-How are publications and projects from different organizational units of the University of Basel contributing to the SDGs? The amounts of publications and projects with SDG contributions differ somewhat between organizational units, but several seem to have a stronger contribution to SDG-03, *"Good health and well-being"*, relative to other SDGs.
+The figure below shows the distribution of SDG-matches in publications stratified by organizational unit. We do not present results concerning organizational units with fewer than 50 matches nor the data on projects, because the latter involved a small number of matches overall. 
 
+As can be seen below, the amounts of publications with SDG contributions differ somewhat between organizational units but several seem to have a focal contribution to SDG-03, *"Good health and well-being"*.
+
+### SDG-matches in publications by organizational unit
 ```{r, fig.height=6}
 cnts = publications %>% 
   select(starts_with("SDG") & ends_with("Elsevier")) %>% 
@@ -143,10 +140,15 @@ ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() +
   scale_fill_gradient(low = unibas_cols[4], high = unibas_cols[1]) + 
   guides(fill = F) +
   labs(x = "Sustainable development goal", 
-       y = "",
-       title = "Unibas organizational units",
-       subtitle = "SDG-related research stratified by organizational unit",
-       caption = "Note: Only organizational units with >50 matches shown.")
+       y = "")
+
+
+#  labs(x = "Sustainable development goal", 
+#       y = "",
+#       title = "Unibas organizational units",
+#       subtitle = "SDG-related research stratified by organizational unit",
+#       caption = "Note: Only organizational units with >50 matches shown.")
+  
 ```
 
 

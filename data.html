@@ -2085,20 +2085,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <div class="d-article">
-<h4 id="preliminaries">Preliminaries</h4>
-<p>The sustainability office of the University of Basel provided us with a multiple databases containing information of the University’s historical electronic research output (publications and funded projects).</p>
-<p>These data have been preprocessed in the following way:</p>
+<h4 id="preprocessing">Preprocessing</h4>
+<p>The Sustainability Office of the University of Basel supplied data from two different databases containing information of the University’s electronic research output (publications and projects).</p>
+<p>These publications data had to be processed to generate abstracts that could be searched using search queries in English:</p>
 <p><i>Publications</i></p>
 <ol type="1">
-<li>Included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).</li>
-<li>Selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%). About half of all publications remained.<br />
+<li>The database included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceedings items (2,144), and books (1,897).</li>
+<li>We selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%) using a custom-made R script. About half of all publications remained.<br />
 </li>
-<li>Identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.</li>
+<li>We identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.</li>
 </ol>
 <p><i>Publications &amp; Projects</i></p>
 <ol type="1">
-<li>Identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) for each item.</li>
-<li>Using translations of the SDG queries of the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> and the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected wether titles or abstracts were SDG-relevant.</li>
+<li>Team members identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) manually using the current <a href="https://edoc.unibas.ch/view/divisions/">descriptors</a>.</li>
+<li>Using translations of the SDG queries of <a href="https://data.mendeley.com/datasets/87txkw7khs/1">Elsevier</a> (Jayabalasingham, Boverhof, Agnew &amp; Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected whether titles or abstracts were SDG-relevant.</li>
 </ol>
 <h4 id="data">Data</h4>
 <p>The data is shared via this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github</b></a> repository.</p>

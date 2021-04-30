@@ -97,7 +97,7 @@ ggplot(sdg_props, aes(x = name, y = prop)) +
                mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .5) +
   theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
   theme(legend.position = "top") +
-  labs(x = "Sustainable development goal", y = "Relative frequency",
+  labs(x = "SDG", y = "Relative frequency",
        caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020)") 
 
 #  labs(x = "Goal", y = "Relative frequency",
@@ -139,7 +139,7 @@ org_sdg_prop = publications %>%
 ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() + 
   scale_fill_gradient(low = unibas_cols[4], high = unibas_cols[1]) + 
   guides(fill = F) +
-  labs(x = "Sustainable development goal", 
+  labs(x = "SDG", 
        y = "") +
   theme(element_text(size=10))
 

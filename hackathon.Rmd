@@ -1,6 +1,6 @@
 ---
-title: "Hackathon"
-description: "Identifying the UN Sustainable Development Goals in University of Basel research output"
+title: "Hackathons"
+description: "A training opportunity in data analytics"
 ---
 
 ```{r setup, include=FALSE}
@@ -9,19 +9,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Setup
 
-The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. The project consisted of a series of planning sessions and two collaborative [hackathons](hackathon.html).
+The Center for Cognitive and Decision Sciences (CDS) coordinated a collaborative project involving several CDS members and MSc students associated with the center. Dr. Dirk Wulff and Prof. Dr. Rui Mata coordinated the project and Dr. Dirk Wulff conducted all data preprocessing and setup for the hackathons (thank you!!!). The project consisted of a series of planning [sessions](https://psychologie.unibas.ch/de/fakultaet/abteilungen/cognitive-and-decision-sciences-305/events/) and two collaborative [hackathons](hackathon.html) described below. Resources related to the hackathons are available on this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>. 
 
-**MSc Students**: Nina Frings, Sophia Prix, ...
+## Hackathons 
 
-**CDS Staff**: Alexandra Bagaini, Yun-Rui Liu, Samuel Aeschbach, ...
+Participants (by grouping and alphabetical order of surname):
 
-**Coordination**: Dirk Wulff, Rui Mata 
+**MSc Students**: Nina Frings, Sophia Prix
 
-## Preliminaries
+**CDS Members**: Samuel Aeschbach, Alexandra Bagaini, Yun-Rui Liu, Rui Mata, Gayoung Son, Dirk Wulff
 
-Participants clone this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github repository</b></a>. 
-
-## Part I - Visualizing (April 14th, 2021)
+### Part I - Data Visualization (April 14th, 2021)
 
 #### Goal
 
@@ -37,11 +35,11 @@ The goal of the first hackathon part is to produce three quality visualizations 
 2. Each group creates three `.pdf` figure files in the `2_figures` folder. Figure files also must receive a suffix identifying the group. See example figure. 
 3. Pull before you Push.
 
-## Part II - Reporting (April 29th, 2021)
+### Part II - Reporting (April 29th, 2021)
 
 #### Goal
 
-The goal of the second hackathon part is to produce a report based on the visualizations produced in the first hackathon. 
+The goal of the second hackathon part is to produce a report based on the visualizations produced in the first hackathon using R Markdown. 
 
 #### Rules
 

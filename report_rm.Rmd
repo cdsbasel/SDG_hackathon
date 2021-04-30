@@ -115,9 +115,9 @@ The queries stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 201
 The Sustainability Office provided data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic publications (e.g., auhors, title, doi) and projects (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications so these were retrieved using the Scopus API though the rscopus package (Muschelli, 2019). About 85% of abstracts could be retrieved in this fashion. 
 The research database included a number of organizational units that have changed across the past years. Faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) were manually identified by team members.
 
-Only publications and projects that were published or completed from 2010 to 2020 were included in the analyses, leading to `r toString(n_publications)` publications, as well as `r toString(n_projects)` projects. In total  `r toString(n_matches_publications)` matches for publications and `r toString(n_matches_projects)` for projects were found. 
+Only publications and projects that were published or completed from 2010 to 2020 were included in the analyses. 
 
-Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
+WHERE ARE THESE COMING FROM? HOW DO THESE RELATE TO THE CA. 18.000 pubs WE ANALYZE? Moreover, publications included journal articles (43,229), book items (chapters, 13,443), journal items (5,028), proceeding items (2,144), and books (1,897).
 
 # Distribution of SDG
 

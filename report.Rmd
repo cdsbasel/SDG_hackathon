@@ -140,8 +140,7 @@ ggplot(org_sdg_prop, aes(x = sdg, y = Unit, fill = Proportion)) + geom_tile() +
   scale_fill_gradient(low = unibas_cols[4], high = unibas_cols[1]) + 
   guides(fill = F) +
   labs(x = "SDG", 
-       y = "") +
-  theme(element_text(size=10))
+       y = "") 
 
 
 #  labs(x = "Sustainable development goal", 

@@ -111,7 +111,7 @@ ggplot(sdg_props, aes(x = name, y = prop)) +
   labs(x = "Sustainable development goal", y = "Relative frequency",
        title = "SDG Overview",
        subtitle = "SDG-matches in publications, self- and externally-funded research projects",
-       caption = "Note: Red reference lines corresponds to numbers presented in a recent Elsevier report.")+
+       caption = "Note: Reference line shows numbers in 'The Power of Data to Advance the SDGs' by Elsevier.") +
   theme(legend.position = "top")
 
 ```

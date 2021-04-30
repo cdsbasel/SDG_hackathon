@@ -88,27 +88,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>CDS Hackathon: Data</title>
 
-  <meta property="description" itemprop="description" content=""/>
+  <meta property="description" itemprop="description" content="Overview of the data and preprocessing steps"/>
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="CDS Hackathon: Data"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content=""/>
+  <meta property="og:description" content="Overview of the data and preprocessing steps"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="CDS Hackathon"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="CDS Hackathon: Data"/>
-  <meta property="twitter:description" content=""/>
+  <meta property="twitter:description" content="Overview of the data and preprocessing steps"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Data"]},{"type":"character","attributes":{},"value":[""]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Data"]},{"type":"character","attributes":{},"value":["Overview of the data and preprocessing steps"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2053,7 +2053,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Data","description":"","authors":[]}
+{"title":"Data","description":"Overview of the data and preprocessing steps","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2080,25 +2080,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Data</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p>Overview of the data and preprocessing steps</p>
 </div>
 
 
 <div class="d-article">
 <h4 id="preprocessing">Preprocessing</h4>
 <p>The Sustainability Office of the University of Basel supplied data from two different databases containing information of the University’s electronic research output (publications and projects).</p>
-<p>These publications data had to be processed to generate abstracts that could be searched using search queries in English:</p>
+<p>The publications dataset had to be processed to generate abstracts that could be searched using search queries in English:</p>
 <p><i>Publications</i></p>
 <ol type="1">
 <li>The database included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceedings items (2,144), and books (1,897).</li>
-<li>We selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%) using a custom-made R script. About half of all publications remained.<br />
+<li>We selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%) using a custom-made <em>R</em> script. About half of all publications remained.<br />
 </li>
 <li>We identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.</li>
 </ol>
 <p><i>Publications &amp; Projects</i></p>
 <ol type="1">
-<li>Team members identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) manually using the current <a href="https://edoc.unibas.ch/view/divisions/">descriptors</a>.</li>
-<li>Using translations of the SDG queries of <a href="https://data.mendeley.com/datasets/87txkw7khs/1">Elsevier</a> (Jayabalasingham, Boverhof, Agnew &amp; Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected whether titles or abstracts were SDG-relevant.</li>
+<li>Team members identified faculty-level organizational units within the University of Basel (including associated and cross-disciplinary institutes) manually, using the <a href="https://edoc.unibas.ch/view/divisions/">descriptors</a> currently in use at the University of Basel.</li>
+<li>We used translations of the SDG queries of <a href="https://data.mendeley.com/datasets/87txkw7khs/1">Elsevier</a> (Jayabalasingham, Boverhof, Agnew &amp; Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora</a> network using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> <em>R</em> package to detect whether titles or abstracts were SDG-relevant.</li>
 </ol>
 <h4 id="data">Data</h4>
 <p>The data is shared via this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github</b></a> repository.</p>

@@ -1,6 +1,6 @@
 ---
 title: "Data"
-description: ""
+description: "Overview of the data and preprocessing steps"
 ---
 
 ```{r setup, include=FALSE}
@@ -11,18 +11,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 The Sustainability Office of the University of Basel supplied data from two different databases containing information of the University's electronic research output (publications and projects). 
 
-These publications data had to be processed to generate abstracts that could be searched using search queries in English:
+The publications dataset had to be processed to generate abstracts that could be searched using search queries in English:
 
 <i>Publications</i>
 
 1. The database included journal articles (N = 43,229), book items (chapters, 13,443), journal items (5,028), proceedings items (2,144), and books (1,897).
-2. We selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%) using a custom-made R script. About half of all publications remained.    
+2. We selected publications with English titles (~85%) and DOI present (~80%) that were published between 2010 and 2020 (~60%) using a custom-made *R* script. About half of all publications remained.    
 3. We identified abstracts for all publications using <a href="https://cran.r-project.org/web/packages/rscopus/index.html">rscopus</a>. About ~85% of abstracts could be retrieved.    
 
 <i>Publications & Projects</i>
 
-1. Team members identified faculty-level organizational unit within the University of Basel (including associated and cross-disciplinary institutes) manually using the current [descriptors](https://edoc.unibas.ch/view/divisions/). 
-2. Using translations of the SDG queries of [Elsevier](https://data.mendeley.com/datasets/87txkw7khs/1) (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora network</a> using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> R package, detected whether titles or abstracts were SDG-relevant.  
+1. Team members identified faculty-level organizational units within the University of Basel (including associated and cross-disciplinary institutes) manually, using the [descriptors](https://edoc.unibas.ch/view/divisions/) currently in use at the University of Basel. 
+2. We used translations of the SDG queries of [Elsevier](https://data.mendeley.com/datasets/87txkw7khs/1) (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora</a> network using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> *R* package to detect whether titles or abstracts were SDG-relevant.  
 
 #### Data
 

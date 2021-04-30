@@ -7,7 +7,7 @@ description: "Overview of the data and preprocessing steps"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-#### Preprocessing
+#### Data and Preprocessing
 
 The Sustainability Office of the University of Basel supplied data from two different databases containing information of the University's electronic research output (publications and projects). 
 
@@ -24,11 +24,11 @@ The publications dataset had to be processed to generate abstracts that could be
 1. Team members identified faculty-level organizational units within the University of Basel (including associated and cross-disciplinary institutes) manually, using the [descriptors](https://edoc.unibas.ch/view/divisions/) currently in use at the University of Basel. 
 2. We used translations of the SDG queries of [Elsevier](https://data.mendeley.com/datasets/87txkw7khs/1) (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and the <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora</a> network using the <a href="https://cran.r-project.org/web/packages/corpustools/corpustools.pdf">corpustools</a> *R* package to detect whether titles or abstracts were SDG-relevant.  
 
-#### Data
-
 The data is shared via this <a href="https://github.com/cdsbasel/SDG_hackathon"><b>Github</b></a> repository. 
 
-<i>Publications columns</i>
+#### Variables
+
+<i>Publications</i>
 
 | Variable | Description |
 |:-------------|:-------------------------------------|
@@ -46,7 +46,7 @@ The data is shared via this <a href="https://github.com/cdsbasel/SDG_hackathon">
 | `Org-*` | Logical vectors indicating Unibas faculty-level organizations involved in publication. |
 | `SDG-*` | Logical vectors indicating whether publication addresses the 17 sustainable development goals. |
 
-<i>Projects columns</i>
+<i>Projects</i>
 
 | Variable | Description |
 |:-------------|:-------------------------------------|

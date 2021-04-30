@@ -108,11 +108,10 @@ ggplot(sdg_props, aes(x = name, y = prop)) +
   geom_segment(data = elsevier %>% mutate(x = (1:16)-.45, xend = (1:16)+.45), 
                mapping = aes(x = x, xend=xend, y = prop, yend=prop), col = unibas_cols[3], size = .3) +
   theme_minimal() + scale_fill_manual(values = unibas_cols[c(5,1,2)]) +
-  labs(x = "Sustainable development goal", 
-       y = "",
-       title = "Unibas organizational units",
-       subtitle = "SDG-related research stratified by organizational unit",
-       caption = "Note: Limited to organizational units with at least 50 matches.") +
+  labs(x = "Sustainable development goal", y = "Relative frequency",
+       title = "SDG Overview",
+       subtitle = "SDG-matches in publications, self- and externally-funded research projects",
+       caption = "Note: Red reference lines corresponds to numbers presented in a recent Elsevier report.")+
   theme(legend.position = "top")
 
 ```

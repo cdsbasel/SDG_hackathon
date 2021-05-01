@@ -1,5 +1,5 @@
 ---
-title: "Hackathons"
+title: "Hackathon"
 description: "A training opportunity in data analytics"
 ---
 
@@ -28,8 +28,8 @@ Participants (by grouping and alphabetical order of surname):
 The goal of the first hackathon part is to produce three quality visualizations illustrating...
 
 1. The frequency distribution of sustainable development goals detected in Unibas publications and projects. 
-2. The relationship between sustainable development goals. 
-3. The distribution of sustainable development goals detected in Unibas publications and projects as a function of Unibas organizational units. 
+2. The distribution of sustainable development goals detected in Unibas publications and projects as a function of Unibas organizational units. 
+3. The relationship between sustainable development goals. 
 
 #### Rules
 
@@ -41,7 +41,7 @@ The goal of the first hackathon part is to produce three quality visualizations 
 
 #### Goal
 
-The goal of the second hackathon part is to produce a report based on the visualizations produced in the first hackathon using R Markdown. 
+The goal of the second hackathon part is to produce a report partly based on the visualizations produced in the first hackathon using R Markdown, in particular those concerning the distribution of SDG-matches overall and by organizational unit. 
 
 #### Rules
 

@@ -58,7 +58,7 @@ The [Sustainability Office](https://www.unibas.ch/en/University/Administration-S
 
 The approach consisted of using established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
 
-The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). We also conducted analysis using alternative queries from the <a href="https://aurora-network.global/project/sdg-analysis-bibliometrics-relevance/">Aurora </a> network but these provide considerably fewer matches overall and are not further discussed here. 
+The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). We also conducted analysis using alternative queries from the <a href="https://aurora-network.global/project/sdg-analysis-bibliometrics-relevance/">Aurora </a> network but these provide considerably fewer matches overall and are not presented here. 
 
 The Sustainability Office supplied data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic *publications* (e.g., auhors, title, doi) and *projects* (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases refer to several organizational units but labels differ across time and databases. Consequently, team members categorized organizational units manually.
 
@@ -180,6 +180,16 @@ ggplot(org_sdg_prop, aes(x = sdg_nam, y = Unit, fill = `Proport.`)) + geom_tile(
 #       caption = "Note: Only organizational units with >50 matches shown.")
   
 ```
+
+## Limitations
+
+- data
+
+- methods
+
+- comparison
+
+## Outlook
 
 
 ## References 

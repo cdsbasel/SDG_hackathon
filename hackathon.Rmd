@@ -15,12 +15,6 @@ Dr. Dirk Wulff and Prof. Dr. Rui Mata coordinated the project and Dr. Dirk Wulff
 
 ## Hackathons 
 
-Participants (by grouping and alphabetical order of surname):
-
-**MSc Students**: Nina Frings, Sophia Prix
-
-**CDS Members**: Samuel Aeschbach, Alexandra Bagaini, Yun-Rui Liu, Rui Mata, Gayoung Son, Dirk Wulff
-
 ### Part I - Data Visualization (April 14th, 2021)
 
 #### Goal
@@ -38,6 +32,8 @@ The goal of the first hackathon part is to produce three quality visualizations 
 3. Pull before you Push.
 
 ### Part II - Reporting (April 29th, 2021)
+
+**Participants**: Nina Frings, Sophia Prix, Samuel Aeschbach, Alexandra Bagaini, Yun-Rui Liu, Rui Mata, Gayoung Son, Dirk Wulff
 
 #### Goal
 

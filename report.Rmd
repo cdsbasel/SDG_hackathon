@@ -56,11 +56,11 @@ The [Sustainability Office](https://www.unibas.ch/en/University/Administration-S
 
 ## Methods 
 
-The approach consisted of using established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
+The approach consisted of using text-mining techniques with established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 
 
-The search queries reported below stemmed from Elsevier (Jayabalasingham, Boverhof, Agnew & Klein, 2019) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). We also conducted analysis using alternative queries from the <a href="https://aurora-network.global/project/sdg-analysis-bibliometrics-relevance/">Aurora </a> network but these provide considerably fewer matches overall and are not further discussed here. 
+The search queries reported below stemmed from Elsevier ([Jayabalasingham, Boverhof, Agnew & Klein, 2019](https://data.mendeley.com/datasets/87txkw7khs/1)) and text search was implemented in *R* (R Core Team, 2021) using the *corpustools* package (Welbers & van Atteveldt, 2021). We also conducted analysis using alternative queries from the <a href="https://aurora-network.global/project/sdg-analysis-bibliometrics-relevance/">Aurora </a> network but these provide considerably fewer matches overall and are not presented here (see section *Limitations and Outlook* below). The analyses focus on only 16 of the 17 SGDs, because the SDG 17, *“Partnerships for the goals”*, can be regarded as a meta-goal for implementing the SDGs and is not associated with dedicated search queries (cf. Jayabalasingham et al., 2020).
 
-The Sustainability Office supplied data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic *publications* (e.g., auhors, title, doi) and *projects* (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases refer to several organizational units but labels differ across time and databases. Consequently, team members categorized organizational units manually.
+The Sustainability Office supplied data on the University of Basel’s research output from two internal databases (i.e., Research Database and the Grants Office database). These data consisted of information on academic **publications** (e.g., auhors, title, doi) and **projects** (e.g., PI, title, abstract, funding source) involving University of Basel's academic staff. The research database did not include abstracts for the publications, so these were retrieved using the Scopus API and the *rscopus* package (Muschelli, 2019). The databases refer to several organizational units but labels differ across time and databases. Consequently, team members categorized organizational units manually.
 
 Only publications and projects that were published or completed from 2010 to 2020 and for which title and abstracts in English were available were included in the analyses. Additional information about the databases and related processing steps is provided in [Data](data.html). 
 
@@ -107,7 +107,7 @@ Of the `r nrow(publications)` **publications** for which a title and abstract we
 
 A similar pattern was found for **projects**: Out of the `r nrow(projects)` projects for which a title and abstract were available in English, a total of `r sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)` (`r round(sum((projects %>% select(starts_with("SDG") & ends_with("Elsevier")) %>% rowSums()) > 0)/nrow(projects),2)*100`%) matched at least one of the SDGs. SDG-03, *"Good health and well-being"*, received the most matches, with a total of `r sum(pro$count[pro$name == "03"])` projects. In turn, SDG-16, *"Peace, Justice, and Strong Institutions"*, and SDG-13, *"Climate action"*, received about a similar number of matches, with a total of `r sum(pro$count[pro$name == "16"])` and `r sum(pro$count[pro$name == "13"])` projects, respectively.
  
-The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on the global scientific output as represented in the Scopus database [(Elsevier, 2020)](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf). Overall, the results suggest that the pattern of SDG-related research at the University of Basel is overall similar to that of the global scientific output, perhaps with a somewhat larger focus on SDG-03, *"Good health and well-being"* in what concerns publications. 
+The figure below shows the relative frequency of outputs dealing with each of the SDGs for publications and projects (further distinguishing between internally- and externally-funded projects). The figure also provides a comparison to the relative frequency of SGDs found by Elsevier based on an literature overview of the global scientific output as represented in the Scopus database (cf., [Elsevier, 2020](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)). Overall, the results suggest that the pattern of SDG-related research at the University of Basel is overall similar to that of the global scientific output, perhaps with a somewhat larger focus on SDG-03, *"Good health and well-being"* in what concerns publications. 
 
 ### SDG-matches in publications and projects
 ```{r, fig.height=6}
@@ -121,7 +121,7 @@ ggplot(sdg_props, aes(x = sdg_nam, y = prop)) +
   theme(legend.position = "top",
         axis.text.x = element_text(angle=45, hjust=1)) +
   labs(x = "", y = "Relative frequency",
-       caption = "Note: Red line shows relative frequency of SDG-matches reported by Elsevier (2020) based on a full literature search") +
+       caption = "Note: Red line shows relative frequency of SDG-matches in the global academic output (Elsevier, 2020)") +
   geom_text(data = tibble(x = 3.6, y = 0.682),
             mapping = aes(x = x, y = y, label = "Elsevier (2020)"),
             col = unibas_cols[3], hjust = 0, size=3)
@@ -139,7 +139,7 @@ The figure below shows the distribution of SDG-matches in publications stratifie
 
 As can be seen below, the amounts of publications with SDG contributions differ somewhat between organizational units but several seem to have a focal contribution to SDG-03, *"Good health and well-being"*. 
 
-Notably, the organizational units contribute to SDG-03 in different ways. Publications of Swiss Tropical and Public Health Institute were most often identified as contributing to SDG-03 for including the keyword "malaria", those of the Faculties of Science and Medicine and the Institute for Biomedical Ethics for including the keyword "cancer", and those of the Faculty of Psychology for including the keyword "mental disorder". 
+Notably, the organizational units contribute to SDG-03 in different ways. Publications of Swiss Tropical and Public Health Institute were most often identified as contributing to SDG-03, *"Good health and well-being"* for including the keyword "malaria", those of the Faculties of Science, Faculty of Medicine, and the Institute for Biomedical Ethics for including the keyword "cancer", and those of the Faculty of Psychology for including the keyword "mental disorder". Consequently, while all these organizational units seem to contribute to SDG-03, *"Good health and well-being"*, they have clearly different research *foci*. 
 
 ### SDG-matches in publications by organizational unit
 ```{r, fig.height=5.5}
@@ -181,8 +181,23 @@ ggplot(org_sdg_prop, aes(x = sdg_nam, y = Unit, fill = `Proport.`)) + geom_tile(
   
 ```
 
+## Limitations and Outlook
+
+- **Representativeness of the data**. The results above are based on a subset of the academic output of the University of Basel for which necessary information was available for analysis (e.g., titles and abstracts in English). As a consequence, the results may not be representative of the scientific production of the University of Basel. The development of search queries applicable to other languages (e.g., German) and availability of additional information (e.g., full-text) could be helpful in obtaining a yet more comprehensive view of the contributions of the University of Basel to the SDGs.
+
+- **Search queries**. The analyses above rely on a specific set of text queries that have been used in past work ([Elsevier, 2020](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)) but whose validity and usefulness is still under scrutiny (e.g., [Bordignon, 2021](http://doi.org/10.1016/j.dib.2021.106731)). We conducted additional analyses using alternative queries (i.e., <a href="https://github.com/Aurora-Network-Global/sdg-queries">Aurora</a>), but these generate considerably fewer matches, which makes overall analysis and interpretation difficult. Future work may want to use the methodology proposed above to investigate the role of different search queries systematically. 
+
+- **Limited comparisons**. The analyses above provide a limited set of comparisons. For example, we offer no direct comparison between the University of Basel and other Swiss or international higher-education institutions either in terms of an overall profile (e.g., relative contribution to the different SDGs), nor in the absolute contributions (e.g., number or publications). Future work could use similar methodology using publication data from other higher-education institutions to provide a more direct comparison between institutions. 
+
+## Conclusion
+
+The University of Basel's research output shows considerable contributions to the United Nations’ Sustainable Development Goals (SDGs), with an overall profile that matches the global academic production ([Elsevier, 2020](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)).  
+
+Further work is necessary to better understand the nature of the University of Basel's contributions to the SDGs, for example, by directly comparing it to other Swiss and international higher-education institutions.
 
 ## References 
+
+Bordignon, F. (2021). Dataset of search queries to map scientific publications to the UN sustainable development goals. Data in Brief, 34, 106731. [http://doi.org/10.1016/j.dib.2021.106731](http://doi.org/10.1016/j.dib.2021.106731)
 
 Elsevier (2020). The Power of Data to Advance the SDGs: Mapping Research for the Sustainable Development Goals. 
 [https://www.elsevier.com](https://www.elsevier.com/__data/assets/pdf_file/0004/1058179/Elsevier-SDG-Report-2020.pdf)

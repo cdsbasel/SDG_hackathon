@@ -54,6 +54,8 @@ As a consequence, the past years have seen the development of new procedures to 
 
 The [Sustainability Office](https://www.unibas.ch/en/University/Administration-Services/General-Secretariat/Sustainability/Team.html) and the [Center for Cognitive and Decision Sciences](https://psychologie.unibas.ch/de/fakultaet/abteilungen/cognitive-and-decision-sciences-305/) of the University of Basel developed a partnership to conduct an overview of the University of Basel's contributions to the Sustainable Development Goals (SDGs) while making results and methodology publicly available. 
 
+This project was funded by **IMPULS**, a program of the University of Basel and U-Change: [www.unibas.ch/impuls](https://www.unibas.ch/impuls). 
+
 ## Methods 
 
 The approach consisted of using text-mining techniques with established search queries to identify University of Basel's research output related to the United Nations' Sustainable Development Goals (SDGs). 

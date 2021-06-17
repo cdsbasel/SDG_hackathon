@@ -61,25 +61,25 @@ sdg_publications_match <- nrow(sdg_publications_match)
 
 The figures below show to percentage of articles published and projects conducted at UNIBAS (externally or internally funded) target different SDGs. SDG #3 is the most studied SDG. 
 
-```{r, echo = F, fig.height=25, fig.width= 15}
+```{r, include=F, echo = F, fig.height=25, fig.width= 15}
 projects_sdg_elsevier_summary <- projects_sdg_elsevier %>% group_by(SDG,type) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/total_projects))
 publication_sdg_elsevier_summary <- publications_sdg_elsevier %>% group_by(SDG) %>% summarise(sum_sdg = sum(match),prop_sdg = 100*(sum(match)/total_articles))
-labels <- c(`SDG-01-Elsevier` = "<img src='assets/E_SDG_PRINT-01.jpg'
-    width='100' />",`SDG-02-Elsevier` = "<img src='assets/E_SDG_PRINT-02.jpg'
-    width='100' />",`SDG-03-Elsevier` = "<img src='assets/E_SDG_PRINT-03.jpg'
-    width='100' />",`SDG-04-Elsevier` = "<img src='assets/E_SDG_PRINT-04.jpg'
-    width='100' />",`SDG-05-Elsevier` = "<img src='assets/E_SDG_PRINT-05.jpg'
-    width='100' />",`SDG-06-Elsevier` = "<img src='assets/E_SDG_PRINT-06.jpg'
-    width='100' />",`SDG-07-Elsevier` = "<img src='assets/E_SDG_PRINT-07.jpg'
-    width='100' />",`SDG-08-Elsevier` = "<img src='assets/E_SDG_PRINT-08.jpg'
-    width='100' />",`SDG-09-Elsevier` = "<img src='assets/E_SDG_PRINT-09.jpg'
-    width='100' />",`SDG-10-Elsevier` = "<img src='assets/E_SDG_PRINT-10.jpg'
-    width='100' />",`SDG-11-Elsevier` = "<img src='assets/E_SDG_PRINT-11.jpg'
-    width='100' />", `SDG-12-Elsevier` = "<img src='assets/E_SDG_PRINT-12.jpg'
-    width='100' />",`SDG-13-Elsevier` = "<img src='assets/E_SDG_PRINT-13.jpg'
-    width='100' />",`SDG-14-Elsevier` = "<img src='assets/E_SDG_PRINT-14.jpg'
-    width='100' />",`SDG-15-Elsevier` = "<img src='assets/E_SDG_PRINT-15.jpg'
-    width='100' />",`SDG-16-Elsevier` = "<img src='assets/E_SDG_PRINT-16.jpg'
+labels <- c(`SDG-01-Elsevier` = "<img src='assets/sdg1.jpg'
+    width='100' />",`SDG-02-Elsevier` = "<img src='assets/sdg2.jpg'
+    width='100' />",`SDG-03-Elsevier` = "<img src='assets/sdg3.jpg'
+    width='100' />",`SDG-04-Elsevier` = "<img src='assets/sdg4.jpg'
+    width='100' />",`SDG-05-Elsevier` = "<img src='assets/sdg5.jpg'
+    width='100' />",`SDG-06-Elsevier` = "<img src='assets/sdg6.jpg'
+    width='100' />",`SDG-07-Elsevier` = "<img src='assets/sdg7.jpg'
+    width='100' />",`SDG-08-Elsevier` = "<img src='assets/sdg8.jpg'
+    width='100' />",`SDG-09-Elsevier` = "<img src='assets/sdg9.jpg'
+    width='100' />",`SDG-10-Elsevier` = "<img src='assets/sdg10.jpg'
+    width='100' />",`SDG-11-Elsevier` = "<img src='assets/sdg11.jpg'
+    width='100' />", `SDG-12-Elsevier` = "<img src='assets/sdg12.jpg'
+    width='100' />",`SDG-13-Elsevier` = "<img src='assets/sdg13.jpg'
+    width='100' />",`SDG-14-Elsevier` = "<img src='assets/sdg14.jpg'
+    width='100' />",`SDG-15-Elsevier` = "<img src='assets/sdg15.jpg'
+    width='100' />",`SDG-16-Elsevier` = "<img src='assets/sdg16.jpg'
     width='100' />")
 
 theme_set(theme_minimal(base_family = "Helvetica", base_size = 18))
